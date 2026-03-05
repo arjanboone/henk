@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Heutink — Het Ontwerpersprofiel</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --ink:    #18120a;
+  --cream:  #faf6ee;
+  --warm:   #f2ead8;
+  --red:    #cc3322;
+  --red-l:  #e04433;
+  --amber:  #d48a14;
+  --green:  #2d6e45;
+  --green-l:#3a8a58;
+  --dim:    #7a6a55;
+  --border: rgba(24,18,10,.1);
+  --shadow: rgba(24,18,10,.07);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html, body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+#pbar { position:fixed; top:0; left:0; height:2px; z-index:400; background:var(--red); transition:width .7s cubic-bezier(.4,0,.2,1); }
+
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:300;
+  padding:.75rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(250,246,238,.94); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+}
+.nav-l { display:flex; align-items:baseline; gap:.6rem; }
+.nav-brand { font-family:'Fraunces',serif; font-size:1rem; font-weight:600; color:var(--red); letter-spacing:-.01em; }
+.nav-dot { width:4px; height:4px; border-radius:50%; background:var(--dim); opacity:.4; align-self:center; }
+.nav-title { font-size:.65rem; font-weight:500; color:var(--dim); letter-spacing:.08em; text-transform:uppercase; }
+.nav-r { font-size:.65rem; font-weight:600; color:var(--dim); }
+
+.screen { display:none; min-height:100vh; flex-direction:column; align-items:center; justify-content:center; padding:5.5rem 1.25rem 3rem; }
+.screen.active { display:flex; }
+.panel { max-width:580px; width:100%; }
+
+/* TYPE */
+.eyebrow { font-size:.6rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:var(--dim); margin-bottom:.85rem; display:flex; align-items:center; gap:.6rem; }
+.eyebrow::after { content:''; flex:1; height:1px; background:var(--border); }
+
+h1.display { font-family:'Fraunces',serif; font-size:clamp(2.8rem,9vw,5rem); font-weight:900; line-height:.92; letter-spacing:-.03em; color:var(--ink); margin-bottom:1rem; }
+h1.display .red { color:var(--red); }
+h1.display .ital { font-style:italic; font-weight:300; }
+
+h2.card-h { font-family:'Fraunces',serif; font-size:1.4rem; font-weight:600; line-height:1.2; color:var(--ink); margin-bottom:.75rem; }
+h2.card-h .ital { font-style:italic; font-weight:300; color:var(--red); }
+
+.body-text { font-size:.875rem; line-height:1.9; color:var(--dim); margin-bottom:1rem; }
+.body-text strong { color:var(--ink); font-weight:600; }
+
+/* CARDS */
+.card { background:white; border:1px solid var(--border); border-radius:6px; padding:1.75rem; margin-bottom:1rem; box-shadow:0 2px 12px var(--shadow), 3px 3px 0 rgba(24,18,10,.04); animation:rise .4s cubic-bezier(.4,0,.2,1) both; }
+@keyframes rise { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+.card-label { font-size:.58rem; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:.6rem; display:flex; align-items:center; gap:.5rem; }
+.card-label::before { content:''; width:16px; height:1.5px; background:var(--red); }
+
+/* BUTTONS — alle varianten expliciet */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; width:100%; padding:.875rem 1.75rem; border:none; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:.875rem; font-weight:600; cursor:pointer; transition:all .14s; margin-bottom:.5rem; letter-spacing:.01em; }
+.btn-red { background:var(--red); color:white !important; box-shadow:3px 3px 0 rgba(24,18,10,.15); }
+.btn-red:hover { background:var(--red-l); transform:translate(-1px,-1px); box-shadow:4px 4px 0 rgba(24,18,10,.15); }
+.btn-red:active { transform:translate(1px,1px); }
+.btn-ink { background:var(--ink); color:white !important; box-shadow:3px 3px 0 rgba(24,18,10,.15); }
+.btn-ink:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 rgba(24,18,10,.15); }
+.btn-green { background:var(--green); color:white !important; box-shadow:3px 3px 0 rgba(24,18,10,.15); }
+.btn-green:hover { background:var(--green-l); transform:translate(-1px,-1px); box-shadow:4px 4px 0 rgba(24,18,10,.15); }
+.btn-amber { background:var(--amber); color:white !important; box-shadow:3px 3px 0 rgba(24,18,10,.15); }
+.btn-amber:hover { transform:translate(-1px,-1px); box-shadow:4px 4px 0 rgba(24,18,10,.15); }
+/* ghost op lichte achtergrond */
+.btn-ghost-light { background:transparent; color:var(--ink) !important; border:1.5px solid var(--border); }
+.btn-ghost-light:hover { border-color:var(--ink); background:rgba(24,18,10,.03); }
+/* ghost op donkere achtergrond — budget knoppen */
+.btn-ghost-dark { background:rgba(255,255,255,.1); color:white !important; border:1.5px solid rgba(255,255,255,.25); }
+.btn-ghost-dark:hover { background:rgba(255,255,255,.18); border-color:rgba(255,255,255,.45); }
+.btn:disabled { opacity:.3; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+/* HENK */
+.henk { background:var(--ink); color:white; border-radius:6px; padding:2rem; margin-bottom:1rem; position:relative; overflow:hidden; box-shadow:4px 4px 0 rgba(24,18,10,.3); animation:rise .4s ease both; }
+.henk::before { content:'HENK'; position:absolute; right:-8px; top:50%; transform:translateY(-50%) rotate(90deg); font-family:'Fraunces',serif; font-size:6rem; font-weight:900; letter-spacing:-.05em; color:rgba(255,255,255,.03); pointer-events:none; white-space:nowrap; }
+.henk-nr { font-size:.58rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:.75rem; }
+.henk-name { font-family:'Fraunces',serif; font-size:2.5rem; font-weight:900; line-height:1; color:white; margin-bottom:.2rem; }
+.henk-meta { font-size:.72rem; color:rgba(255,255,255,.4); margin-bottom:1.25rem; }
+.henk-body { font-size:.875rem; line-height:1.9; color:rgba(255,255,255,.7); border-top:1px solid rgba(255,255,255,.08); padding-top:1.25rem; }
+.henk-body strong { color:white; }
+
+/* OPTIONS */
+.options { display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.1rem; }
+.opt { background:var(--warm); border:1.5px solid transparent; border-radius:5px; padding:1rem 1.1rem; cursor:pointer; transition:all .14s; display:flex; gap:.85rem; align-items:flex-start; text-align:left; }
+.opt:hover { background:white; border-color:rgba(24,18,10,.15); transform:translateX(2px); }
+.opt.selected { background:white; border-color:var(--red); }
+.opt.selected .opt-key { background:var(--red); color:white; border-color:var(--red); }
+.opt-key { width:26px; height:26px; border-radius:3px; flex-shrink:0; border:1.5px solid rgba(24,18,10,.15); color:var(--dim); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-size:.8rem; font-weight:600; transition:all .14s; margin-top:.1rem; }
+.opt-main { font-size:.875rem; line-height:1.65; color:var(--ink); }
+.opt-sub { font-size:.72rem; color:var(--dim); margin-top:.3rem; font-style:italic; line-height:1.5; }
+.opt-joke { display:inline-flex; align-items:center; gap:.3rem; margin-top:.4rem; font-size:.65rem; font-weight:600; background:rgba(212,138,20,.1); color:var(--amber); padding:.2rem .55rem; border-radius:3px; }
+
+/* LAAG REFLECTIE — losgekoppeld van individuele vragen */
+.reflectie-card { background:var(--warm); border:1.5px solid var(--border); border-radius:6px; padding:1.5rem; margin-bottom:1rem; animation:rise .35s ease both; }
+.reflectie-intro { font-size:.8rem; line-height:1.75; color:var(--dim); margin-bottom:1rem; font-style:italic; border-left:2px solid var(--red); padding-left:.85rem; }
+.ref-opts { display:flex; flex-direction:column; gap:.4rem; }
+.ref-opt { background:white; border:1.5px solid var(--border); border-radius:4px; padding:.75rem 1rem; cursor:pointer; transition:all .14s; display:flex; gap:.7rem; align-items:flex-start; font-size:.82rem; line-height:1.6; color:var(--dim); }
+.ref-opt:hover { border-color:rgba(24,18,10,.25); color:var(--ink); }
+.ref-opt.selected { border-color:var(--red); color:var(--ink); background:rgba(204,51,34,.03); font-weight:500; }
+.ref-bullet { width:7px; height:7px; border-radius:50%; background:rgba(24,18,10,.15); flex-shrink:0; margin-top:.38rem; transition:background .14s; }
+.ref-opt.selected .ref-bullet { background:var(--red); }
+
+/* BUDGET */
+.budget-card { background:linear-gradient(135deg,#1a3a2a,#0d2018); border-radius:6px; padding:1.75rem; margin-bottom:1rem; position:relative; overflow:hidden; box-shadow:4px 4px 0 rgba(24,18,10,.25); animation:rise .4s ease both; }
+.budget-card::before { content:'€'; position:absolute; right:1rem; top:50%; transform:translateY(-50%); font-family:'Fraunces',serif; font-size:7rem; font-weight:900; color:rgba(255,255,255,.04); pointer-events:none; }
+.b-label-txt { font-size:.58rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.35); margin-bottom:.6rem; }
+.b-scenario { font-family:'Fraunces',serif; font-size:1.1rem; font-weight:600; color:white; line-height:1.4; margin-bottom:.75rem; }
+.b-detail { font-size:.8rem; line-height:1.75; color:rgba(255,255,255,.6); margin-bottom:1.1rem; }
+.b-detail strong { color:white; }
+.b-opts { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1.25rem; }
+.bopt { background:rgba(255,255,255,.06); border:1.5px solid rgba(255,255,255,.1); border-radius:4px; padding:.8rem 1rem; cursor:pointer; transition:all .14s; display:flex; gap:.75rem; align-items:flex-start; text-align:left; }
+.bopt:hover { background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.22); }
+.bopt.selected { background:rgba(45,110,69,.25); border-color:rgba(45,200,100,.4); }
+.bopt-key { font-family:'Fraunces',serif; font-size:.8rem; font-weight:600; color:rgba(255,255,255,.4); flex-shrink:0; margin-top:.1rem; width:16px; }
+.bopt.selected .bopt-key { color:rgba(100,220,140,.9); }
+.bopt-text { font-size:.8rem; line-height:1.6; color:rgba(255,255,255,.7); }
+.bopt.selected .bopt-text { color:white; }
+
+/* KLEUR MODULE */
+.kleur-grid { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1rem; }
+.kleur-opt { border-radius:5px; padding:1rem; cursor:pointer; transition:all .15s; border:2px solid transparent; min-height:80px; display:flex; flex-direction:column; justify-content:flex-end; position:relative; }
+.kleur-opt:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(24,18,10,.12); }
+.kleur-opt.selected { border-color:var(--ink); box-shadow:3px 3px 0 var(--ink); }
+.kleur-opt.selected::after { content:'✓'; position:absolute; top:.5rem; right:.6rem; font-size:.75rem; font-weight:700; color:var(--ink); }
+.kleur-label { font-size:.72rem; font-weight:600; color:var(--ink); line-height:1.4; }
+.kleur-sub { font-size:.62rem; color:var(--dim); margin-top:.2rem; }
+.dark-swatch .kleur-label, .dark-swatch .kleur-sub { color:rgba(255,255,255,.85); }
+.dark-swatch.selected::after { color:white; }
+
+.swatch-hoek-a { background:linear-gradient(135deg,#e8e0d0,#d4c8b0); }
+.swatch-hoek-b { background:linear-gradient(135deg,#f0e8e0,#e0d4cc); }
+.swatch-hoek-c { background:linear-gradient(135deg,#d8e8d4,#c4d8c0); }
+.swatch-hoek-d { background:linear-gradient(135deg,#2a2420,#3a3028); }
+.swatch-mat-a  { background:linear-gradient(135deg,#c8a878,#a88858); }
+.swatch-mat-b  { background:linear-gradient(135deg,#e8e4dc,#d4d0c8); }
+.swatch-mat-c  { background:linear-gradient(135deg,#e8d8d0,#c8b0a8); }
+.swatch-mat-d  { background:linear-gradient(135deg,#2a3040,#3a4050); }
+.swatch-kleur-a { background:linear-gradient(135deg,#c8b090,#a89070); }
+.swatch-kleur-b { background:linear-gradient(135deg,#e8d020,#d4bc10); }
+.swatch-kleur-c { background:linear-gradient(135deg,#d8e8e0,#a8c8c0); }
+.swatch-kleur-d { background:linear-gradient(135deg,#1a1a1a,#2a2a2a); }
+.swatch-licht-a { background:linear-gradient(135deg,#fff8e8,#ffe8c0); }
+.swatch-licht-b { background:linear-gradient(135deg,#e8f0f8,#d0e0f0); }
+.swatch-licht-c { background:linear-gradient(135deg,#1a1a2a 30%,#e8e0d0); }
+.swatch-licht-d { background:linear-gradient(135deg,#3a2818,#8a7060); }
+.swatch-ruimte-a { background:linear-gradient(135deg,#e8eef8,#c8d8e8); }
+.swatch-ruimte-b { background:linear-gradient(135deg,#e8e0d8,#c8b8a8); }
+.swatch-ruimte-c { background:linear-gradient(135deg,#d8e8d0,#e8d8d0 50%,#d8d8e8); }
+.swatch-ruimte-d { background:linear-gradient(135deg,#e0d8c8,#c8d0d8,#d8c8d0); }
+
+/* TEAM CODE */
+.team-input { width:100%; padding:.85rem 1rem; font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; letter-spacing:.2em; text-align:center; text-transform:uppercase; border:2px solid var(--border); border-radius:5px; background:white; color:var(--ink); outline:none; transition:border-color .15s; }
+.team-input:focus { border-color:var(--red); }
+.team-input::placeholder { color:var(--dim); opacity:.5; font-size:1rem; letter-spacing:.05em; }
+
+/* RADAR */
+.radar-wrap { position:relative; width:240px; height:240px; margin:0 auto 1.5rem; }
+canvas.radar-canvas { width:240px; height:240px; }
+.radar-labels { position:absolute; inset:0; pointer-events:none; }
+.r-lbl { position:absolute; font-size:.55rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--dim); text-align:center; width:72px; transform:translate(-50%,-50%); line-height:1.3; }
+
+/* PROFIEL KAART */
+.profiel-header { text-align:center; padding:2rem 1.75rem; background:var(--ink); border-radius:6px; margin-bottom:1rem; box-shadow:5px 5px 0 rgba(24,18,10,.2); position:relative; overflow:hidden; }
+.profiel-header::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 50%,rgba(204,51,34,.15),transparent 60%); }
+.profiel-icon { font-size:2.5rem; margin-bottom:.75rem; position:relative; }
+.profiel-type { font-family:'Fraunces',serif; font-size:1.8rem; font-weight:900; color:white; margin-bottom:.3rem; line-height:1.1; position:relative; }
+.profiel-sub { font-size:.72rem; color:rgba(255,255,255,.45); font-weight:400; letter-spacing:.06em; text-transform:uppercase; position:relative; }
+.profiel-cite { font-family:'Fraunces',serif; font-size:1rem; font-style:italic; font-weight:300; color:var(--ink); line-height:1.7; border-left:3px solid var(--red); padding-left:1.1rem; margin:1.25rem 0; }
+.profiel-desc { font-size:.875rem; line-height:1.85; color:var(--dim); }
+.profiel-desc strong { color:var(--ink); }
+
+.kleur-chips { display:flex; gap:.4rem; flex-wrap:wrap; margin:.75rem 0; }
+.chip { width:28px; height:28px; border-radius:3px; border:1.5px solid rgba(24,18,10,.1); flex-shrink:0; }
+
+/* BRUG */
+.brug { background:var(--red); border-radius:6px; padding:2rem; text-align:center; color:white; box-shadow:5px 5px 0 rgba(24,18,10,.15); animation:rise .5s cubic-bezier(.4,0,.2,1) .2s both; }
+.brug h3 { font-family:'Fraunces',serif; font-size:1.4rem; font-weight:600; line-height:1.25; margin-bottom:.75rem; }
+.brug p { font-size:.85rem; line-height:1.8; color:rgba(255,255,255,.82); margin-bottom:1rem; }
+.brug .floor { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:900; font-style:italic; }
+.brug .email { font-size:.72rem; color:rgba(255,255,255,.5); margin-top:.3rem; }
+
+/* TRACK */
+.track { display:flex; gap:.3rem; justify-content:center; margin-bottom:1.5rem; flex-wrap:wrap; }
+.track-dot { width:7px; height:7px; border-radius:50%; background:var(--border); transition:all .3s; }
+.track-dot.done { background:var(--red); }
+.track-dot.budget-done { background:var(--green); }
+.track-dot.is-budget { background:rgba(45,110,69,.25); }
+
+.meta-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; }
+.meta-nr { font-size:.62rem; font-weight:600; color:var(--dim); letter-spacing:.08em; text-transform:uppercase; }
+.meta-tag { font-size:.62rem; font-weight:600; color:var(--red); background:rgba(204,51,34,.08); padding:.2rem .6rem; border-radius:20px; }
+
+hr.div { border:none; border-top:1px solid var(--border); margin:1.25rem 0; }
+
+.section-intro { text-align:center; padding:2.5rem 1.75rem; background:white; border:1px solid var(--border); border-radius:6px; margin-bottom:1rem; box-shadow:3px 3px 0 var(--shadow); }
+.section-intro .s-icon { font-size:2.5rem; margin-bottom:.75rem; }
+.section-intro h3 { font-family:'Fraunces',serif; font-size:1.4rem; font-weight:600; margin-bottom:.5rem; }
+.section-intro p { font-size:.85rem; line-height:1.8; color:var(--dim); }
+
+/* TEAM OVERZICHT */
+.team-profiel-row { display:flex; gap:.85rem; align-items:flex-start; padding:1rem; background:white; border-radius:5px; margin-bottom:.6rem; border:1px solid var(--border); transition:border-color .15s; }
+.team-profiel-row:hover { border-color:rgba(24,18,10,.2); }
+.tp-icon { font-size:1.6rem; flex-shrink:0; }
+.tp-name { font-family:'Fraunces',serif; font-size:.95rem; font-weight:600; color:var(--ink); }
+.tp-type { font-size:.72rem; font-weight:600; color:var(--red); margin-top:.1rem; }
+.tp-chips { display:flex; gap:.3rem; margin-top:.4rem; }
+.tp-chip { width:18px; height:18px; border-radius:2px; border:1px solid rgba(24,18,10,.1); }
+
+.overlap-bar { height:8px; border-radius:4px; background:linear-gradient(90deg,rgba(40,160,90,.7),rgba(230,160,20,.7)); margin:.5rem 0; transition:width .8s ease; }
+
+.fine { font-size:.62rem; color:var(--dim); text-align:center; margin-top:1.5rem; line-height:1.9; }
+.fine em { color:var(--red); font-style:italic; }
+
+/* COMBINED RADAR — meerdere kleuren */
+.combined-legend { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-bottom:.75rem; }
+.legend-item { display:flex; align-items:center; gap:.35rem; font-size:.65rem; font-weight:600; color:var(--dim); }
+.legend-dot { width:10px; height:10px; border-radius:50%; }
+</style>
+</head>
+<body>
+<div id="pbar" style="width:0%"></div>
+<nav class="nav">
+  <div class="nav-l">
+    <span class="nav-brand">heutink.</span>
+    <div class="nav-dot"></div>
+    <span class="nav-title">het ontwerpersprofiel</span>
+  </div>
+  <span class="nav-r" id="nav-r">— voor de studio</span>
+</nav>
+
+<!-- INTRO -->
+<div id="s-intro" class="screen active">
+  <div style="max-width:520px;width:100%;text-align:center">
+    <div class="eyebrow" style="justify-content:center">Wouter · Rozemarijn · Marrel · Isa · Emma</div>
+    <h1 class="display">Het ont<span class="ital">werp</span>ers<span class="red">profiel.</span></h1>
+    <p class="body-text" style="max-width:380px;margin:0 auto 1.75rem">
+      24 vragen. 6 budgetmomenten. Een kleurmodule.<br>
+      Aan het einde weten jullie wie jullie zijn als ontwerpers.<br>
+      <strong>En of jullie het met elkaar eens zijn.</strong>
+    </p>
+    <div style="display:flex;gap:.6rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap">
+      <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:.6rem 1rem;text-align:center">
+        <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--red)">24</div>
+        <div style="font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)">Vragen</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:.6rem 1rem;text-align:center">
+        <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--green)">6</div>
+        <div style="font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)">Budget</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:.6rem 1rem;text-align:center">
+        <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--amber)">5</div>
+        <div style="font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)">Kleur</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:4px;padding:.6rem 1rem;text-align:center">
+        <div style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:900;color:var(--ink)">~20'</div>
+        <div style="font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)">Minuten</div>
+      </div>
+    </div>
+    <button class="btn btn-red" onclick="goTo('s-naam')">🎒 Begin</button>
+    <div style="margin-top:.85rem;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-ghost-light" onclick="goTo('s-team-bekijk')" style="font-size:.78rem;padding:.6rem 1.25rem;width:auto">👥 Teamoverzicht</button>
+      <button class="btn btn-ghost-light" onclick="laadDemoDirecte()" style="font-size:.78rem;padding:.6rem 1.25rem;width:auto">🔍 Voorbeeldprofiel</button>
+    </div>
+    <div class="fine">Geen goede of slechte antwoorden · Wel interessante gesprekken<br><em>Tip: speel individueel, vergelijk daarna</em></div>
+  </div>
+</div>
+
+<!-- NAAM + TEAMCODE -->
+<div id="s-naam" class="screen">
+  <div class="panel">
+    <div class="card">
+      <div class="card-label">Jouw naam</div>
+      <h2 class="card-h">Wie ben jij?</h2>
+      <p class="body-text">Zodat het teamoverzicht klopt.</p>
+      <input type="text" id="inp-naam" placeholder="Voornaam" style="width:100%;padding:.85rem 1rem;font-family:'DM Sans',sans-serif;font-size:1rem;border:2px solid var(--border);border-radius:5px;background:white;color:var(--ink);outline:none;margin-bottom:.5rem;transition:border-color .15s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--border)'" oninput="checkNaam()">
+    </div>
+
+    <!-- ALS TEAMCODE AL INGEVULD VIA URL -->
+    <div class="card" id="team-prefilled" style="display:none;border-color:rgba(45,110,69,.25);background:rgba(45,110,69,.04)">
+      <div class="card-label" style="color:var(--green)">Teamcode — via link</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span id="team-prefilled-code" style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;letter-spacing:.1em;color:var(--ink)">—</span>
+        <span style="font-size:.7rem;color:var(--green);font-weight:600">✓ Automatisch ingevuld</span>
+      </div>
+      <p style="font-size:.75rem;color:var(--dim);margin-top:.5rem;line-height:1.6">Je gebruikt de teamcode uit de link. Zorg dat je collega's dezelfde link hebben.</p>
+    </div>
+
+    <!-- ALS GEEN TEAMCODE IN URL: genereer of vul in -->
+    <div id="team-manual" class="card">
+      <div class="card-label">Teamcode</div>
+      <h2 class="card-h">Eén code voor <span class="ital">de hele studio.</span></h2>
+      <p class="body-text">Ben jij de eerste? Genereer een code en deel hem. Is er al een code? Vul hem in.</p>
+
+      <div style="display:flex;gap:.5rem;margin-bottom:.75rem">
+        <input type="text" id="inp-team" class="team-input" placeholder="HENK-···" maxlength="10"
+          style="flex:1;font-size:1.1rem"
+          oninput="this.value=this.value.toUpperCase();checkNaam()">
+        <button onclick="genereerCode()" style="flex-shrink:0;padding:.75rem 1rem;background:var(--warm);border:1.5px solid var(--border);border-radius:4px;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;color:var(--ink);white-space:nowrap" title="Genereer een nieuwe code">↻ Genereer</button>
+      </div>
+
+      <!-- Deellink — verschijnt na genereren of invullen -->
+      <div id="deel-wrap" style="display:none;background:var(--warm);border-radius:4px;padding:.85rem;border:1px solid var(--border)">
+        <div style="font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:.4rem">Deellink voor je team</div>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <code id="deel-url" style="font-size:.72rem;color:var(--ink);flex:1;word-break:break-all;line-height:1.5">—</code>
+          <button onclick="kopieerLink()" id="btn-kopier"
+            style="flex-shrink:0;padding:.5rem .75rem;background:var(--ink);color:white;border:none;border-radius:3px;font-size:.7rem;font-weight:600;cursor:pointer;white-space:nowrap">
+            Kopieer
+          </button>
+        </div>
+        <div style="font-size:.62rem;color:var(--dim);margin-top:.4rem;font-style:italic">Stuur deze link naar je collega's. Wie hem opent heeft de teamcode al ingevuld.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-red" id="btn-start" disabled onclick="startGame()">→ Start het profiel</button>
+    <div class="fine">Teamcode wordt lokaal opgeslagen · Alleen jouw eigen antwoorden worden bewaard</div>
+  </div>
+</div>
+
+<!-- VRAAG -->
+<div id="s-q" class="screen">
+  <div class="panel">
+    <div class="track" id="track"></div>
+    <div class="meta-bar">
+      <span class="meta-nr" id="q-nr">Vraag 1 van 20</span>
+      <span class="meta-tag" id="q-tag">—</span>
+    </div>
+    <div class="card" id="q-card">
+      <div class="card-label" id="q-label">—</div>
+      <h2 class="card-h" id="q-title">—</h2>
+      <p class="body-text" id="q-body">—</p>
+      <div class="options" id="q-opts"></div>
+    </div>
+    <button class="btn btn-red" id="btn-next" disabled onclick="nextStep()">→ Volgende</button>
+  </div>
+</div>
+
+<!-- LAAG REFLECTIE — losgekoppeld -->
+<div id="s-reflectie" class="screen">
+  <div class="panel">
+    <div class="track" id="ref-track"></div>
+    <div class="card">
+      <div class="card-label" id="ref-laag-label">Reflectie — Laag 1</div>
+      <h2 class="card-h" id="ref-title">Wat drijft jou <span class="ital">als ontwerper?</span></h2>
+      <p class="body-text" id="ref-intro-txt">Je hebt net vier vragen beantwoord over Henk en zijn klas. Los van je individuele keuzes — wat is de dieperliggende overtuiging die jouw werk aanstuurt?</p>
+    </div>
+    <div class="reflectie-card">
+      <div class="reflectie-intro" id="ref-context">Kies de uitspraak die het meest bij jou past als ontwerper.</div>
+      <div class="ref-opts" id="ref-opts"></div>
+    </div>
+    <button class="btn btn-red" id="btn-ref-next" disabled onclick="afterReflectie()">→ Verder</button>
+  </div>
+</div>
+
+<!-- BUDGET -->
+<div id="s-budget" class="screen">
+  <div class="panel">
+    <div class="track" id="b-track"></div>
+    <div class="budget-card">
+      <div class="b-label-txt" id="b-label">// Budgetmoment 1</div>
+      <div class="b-scenario" id="b-scenario">—</div>
+      <div class="b-detail" id="b-detail">—</div>
+      <div class="b-opts" id="b-opts"></div>
+      <button class="btn btn-ghost-dark" id="btn-b-next" disabled onclick="afterBudget()">→ Volgende laag</button>
+    </div>
+  </div>
+</div>
+
+<!-- KLEUR -->
+<div id="s-kleur" class="screen">
+  <div class="panel">
+    <div class="section-intro">
+      <div class="s-icon">🎨</div>
+      <h3>De kleurmodule.</h3>
+      <p>Geen filosofie. Geen motivatie. Gewoon instinct. Vijf keuzes die letterlijk kleur geven aan jullie profiel.</p>
+    </div>
+    <div id="kleur-vragen"></div>
+    <button class="btn btn-amber" id="btn-kleur-next" disabled onclick="finishGame()">→ Bekijk jouw profiel</button>
+  </div>
+</div>
+
+<!-- RESULTAAT -->
+<div id="s-result" class="screen">
+  <div class="panel">
+    <div id="profiel-wrap"></div>
+    <div class="brug">
+      <h3>Er is iemand die zo naar campagnes kijkt als jullie naar inrichting.</h3>
+      <p>Hij lost Henk niet op door harder te duwen.<br>Hij verandert de omgeving.<br><br>Hij solliciteert bij Heutink als campagnemarketeer.<br>En hij heeft jullie net laten voelen wat hij kan.</p>
+      <div class="floor">Vraag Floor Beek maar.</div>
+      <div class="email">floor.beek@heutink.nl</div>
+    </div>
+    <div style="margin-top:1rem">
+      <button class="btn btn-ghost-light" onclick="goTo('s-team-bekijk')">👥 Bekijk het teamoverzicht</button>
+    </div>
+    <div class="fine">Gemaakt door Arjan Boone · 2026<br><em>De stoel die Henk nodig heeft bestaat waarschijnlijk al in jullie catalogus.</em></div>
+  </div>
+</div>
+
+<!-- TEAM OVERZICHT -->
+<div id="s-team-bekijk" class="screen">
+  <div class="panel">
+    <div class="card">
+      <div class="card-label">Teamoverzicht</div>
+      <h2 class="card-h">Wie zijn <span class="ital">jullie</span> als studio?</h2>
+      <p class="body-text">Voer de teamcode in om alle profielen te zien.</p>
+      <input type="text" id="inp-team-bekijk" class="team-input" placeholder="TEAMCODE" maxlength="8" oninput="this.value=this.value.toUpperCase()">
+      <div style="height:.75rem"></div>
+      <button class="btn btn-ink" onclick="laadTeam()">→ Laad teamoverzicht</button>
+      <button class="btn btn-ghost-light" onclick="laadDemo()" style="font-size:.78rem;padding:.65rem 1.25rem">✦ Bekijk voorbeeldteam</button>
+    </div>
+    <div id="team-resultaat"></div>
+    <div style="margin-top:.5rem">
+      <button class="btn btn-ghost-light" onclick="goTo('s-intro')">← Terug</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════ DATA ══════
+
+var VRAGEN = [
+  // LAAG 1 — HENK (4 vragen)
+  { laag:1, laagnm:'Laag 1 — Henk', tag:'De plek van Henk', label:'Ruimtelijke keuze',
+    title:'Waar zet jij <span class="ital">Henk</span> neer?',
+    body:'Meester Joost vraagt of jij de klas opnieuw mag indelen. De meeste basisscholen hebben nog een vaste opstelling per kind — maar jij hebt een keuze.',
+    opts:[
+      {k:'A',text:'Vooraan, vlak bij het bord. Henk in het zicht — Joost kan hem aanspreken en bijsturen.',sub:'De ejectorstoel-aanpak. Henk haat het.',joke:'🪑 Schuldstoelᵀᴹ — standaard schuin naar achteren geleund',val:'structuur'},
+      {k:'B',text:'Aan de zijkant bij het raam. Henk heeft uitzicht — prikkels voor zijn hoofd, rust voor de rest.',sub:'Werkt totdat hij het raam openzet.',joke:'🪟 Hoogte-verstelbare tafel erbij — Henk staat toch liever',val:'vrijheid'},
+      {k:'C',text:'Achterin, in een semi-afgeschermde werkplek. Henk heeft ruimte, de klas heeft rust.',sub:'Risico: hij houdt vanuit zijn fort nog luider commentaar.',joke:'🏰 Lage kast als muur — "Fort Henk" in de wandelgangen',val:'structuur'},
+      {k:'D',text:'Midden in een groepje. Sociale druk werkt beter dan de meester.',sub:'Gevaar: het groepje overleeft dit mogelijk niet.',joke:'⬡ Zeshoekige groepstafel — niemand weet écht wie naast Henk zit',val:'kind'}
+    ]},
+  { laag:1, laagnm:'Laag 1 — Henk', tag:'Lichaam en beweging', label:'Ergonomische keuze',
+    title:'Henk\'s lichaam kan niet <span class="ital">stilzitten.</span>',
+    body:'Henk zit dwars op zijn stoel. Niet omdat hij dwars wil zijn — zijn lichaam vraagt om beweging. Wat geef je hem?',
+    opts:[
+      {k:'A',text:'Een wiebelstoel. Zijn lichaam mag bewegen — dan kan zijn hoofd meeluisteren.',joke:'🌀 VS Jumper Air Active — inofficieel Henks speeltje voor 10 minuten',val:'zintuiglijk'},
+      {k:'B',text:'Een staantafel. Henk mag ook staand werken — hij hoeft niet te "zitten zoals het hoort".',joke:'📏 Hoogte-verstelbaar — Henk zet hem meteen op de hoogste stand. Prima.',val:'vrijheid'},
+      {k:'C',text:'Een comfortabele ergonomische stoel. Een lichaam dat comfortabel zit ontsnapt minder snel.',sub:'Optimistisch.',joke:'🪑 Educo Kubenstoel — 180° omdraaibaar, Henk zit er gegarandeerd verkeerdom op',val:'functioneel'},
+      {k:'D',text:'Niets. Dit vraagt om een gesprek, niet om een meubel.',sub:'De eerlijkste keuze.',joke:'🗣️ Geen meubel. Wel een factuur voor het adviesgesprek.',val:'pragmatisch'}
+    ]},
+  { laag:1, laagnm:'Laag 1 — Henk', tag:'Rol en verantwoordelijkheid', label:'Pedagogische keuze',
+    title:'Henk wil <span class="ital">gelijk hebben.</span> Geef je hem dat?',
+    body:'Henk gaat in discussie met Joost omdat hij ergens een rol wil. Iets waarop hij trots kan zijn. Wat doe je daarmee in het ontwerp?',
+    opts:[
+      {k:'A',text:'Een experthoek — een plek die Henk beheert. De klassenbibliotheek. Het materiaalstation.',joke:'📚 Kast met naamplaatje "Beheerd door Henk". Joost heeft dit ook gevraagd eigenlijk.',val:'kind'},
+      {k:'B',text:'Een presentatieplek — whiteboard op wielen, Henk kan er zonder toestemming naartoe.',joke:'🖊️ Whiteboard op wielen — Henk rijdt hem dag één naar zijn plek. Dat is de bedoeling.',val:'vrijheid'},
+      {k:'C',text:'Je maakt de hele klas zo dat elk kind een rol kan pakken — dan heeft Henk minder behoefte om te domineren.',sub:'Systemisch denken.',joke:'🔄 Modulaire opstelling — alles beweegt, niemand is de baas. Nieuw voor Henk.',val:'ruimte'},
+      {k:'D',text:'Een rustige terugtrekplek. Henk heeft geen spotlight nodig — hij heeft stilte nodig. Dat weet hij nog niet.',joke:'🏡 Kids-F leeshuisje — Henk past er net in. Protesteert maar zit er elke dag.',val:'zintuiglijk'}
+    ]},
+  { laag:1, laagnm:'Laag 1 — Henk', tag:'De leerkracht', label:'Relatiegerichte keuze',
+    title:'Meester Joost is ook <span class="ital">aan zijn einde.</span>',
+    body:'Hij heeft Henk nu drie jaar. Ontwerp jij ook voor hem?',
+    opts:[
+      {k:'A',text:'Ja. Een docentenhoek die écht van hem is. Afstand, overzicht, rust.',joke:'🪑 Docentenstoel met uitzicht — Joost zit hier nooit want hij loopt altijd.',val:'ruimte'},
+      {k:'B',text:'Nee. Het ontwerp is voor de kinderen. Joost past zich aan aan de ruimte.',joke:'📐 Geen bureau. Joost heeft een klembord. Dat is zijn bureau.',val:'kind'},
+      {k:'C',text:'Indirect. Als de klas rustiger is, is Joost automatisch rustiger.',joke:'⚖️ De domino-aanpak. Trek één steen recht en de rest volgt.',val:'functioneel'},
+      {k:'D',text:'Je ontwerpt een gespreksplek. Joost en Henk. Klein tafeltje, twee stoelen, geen publiek.',joke:'☕ Instructietafel voor twee — het onderhandelingstafel. Henk zit er scheef op.',val:'kind'}
+    ]},
+
+  // LAAG 2 — DE KLAS (4 vragen)
+  { laag:2, laagnm:'Laag 2 — De klas', tag:'Licht', label:'Atmosferische keuze',
+    title:'Het zonlicht valt elke ochtend op <span class="ital">Henk\'s tafel.</span>',
+    body:'Tussen 10 en 12 uur directe zon. Wat doe jij?',
+    opts:[
+      {k:'A',text:'Je past het licht aan op het moment van de dag. Ochtend open, middag gedempt.',joke:'🕐 Tijdgestuurde jaloezieën — Henk vraagt op dag één hoe hij ze handmatig bedient.',val:'functioneel'},
+      {k:'B',text:'Je geeft elk kind controle over zijn eigen lichtplek. Autonomie als instrument.',joke:'🪟 Individuele jaloezieën — Henk trekt ze allemaal dicht. Experiment geslaagd.',val:'vrijheid'},
+      {k:'C',text:'Je ontwerpt met indirect licht als basis. Diffuus, gelijkmatig, geen harde schaduwen.',joke:'💡 Indirecte armaturen — staat prachtig. Joost mist het warme daglicht.',val:'functioneel'},
+      {k:'D',text:'Je omarmt het contrast. Dramatisch licht op werkplekken, donkere rustzones.',joke:'🎭 Licht als architectuur — Henk zit in de spotlight. Hij vindt dit eigenlijk wel wat.',val:'zintuiglijk'}
+    ]},
+  { laag:2, laagnm:'Laag 2 — De klas', tag:'Geluid', label:'Sensorische keuze',
+    title:'De klas is nooit <span class="ital">stil.</span>',
+    body:'Fluisteren, stoelen schuiven, Henk. Wat is jouw uitgangspunt voor geluid?',
+    opts:[
+      {k:'A',text:'Stilte is de norm. Zachte materialen, geluidsabsorptie, minder echo.',joke:'🧱 Akoestische wandpanelen — Henk plakt er binnen een week iets op.',val:'structuur'},
+      {k:'B',text:'Je ontwerpt zones — stille zone en werkzone. Kinderen kiezen zelf.',joke:'🗺️ Zonering met lage kasten — werkt totdat Henk door de grens heen praat.',val:'vrijheid'},
+      {k:'C',text:'Achtergrondgeluid helpt. Een zachte hum verbetert concentratie — onderzoek zegt het.',sub:'Controversieel maar wetenschappelijk onderbouwd.',joke:'🎵 Geen meubel. Wel lo-fi beats. Henk wil de afstandsbediening.',val:'zintuiglijk'},
+      {k:'D',text:'Je ontwerpt voor de bron. Als Joost rustiger praat, praat de klas rustiger.',joke:'🎤 Akoestiek begint bij de leerkracht. Henk vindt dit een uitdaging.',val:'ruimte'}
+    ]},
+  { laag:2, laagnm:'Laag 2 — De klas', tag:'Muren', label:'Visuele keuze',
+    title:'Je mag de muren <span class="ital">inrichten.</span>',
+    body:'In sommige scholen wisselt het werk wekelijks. Anderen kiezen bewust voor rust. Jij mag kiezen.',
+    opts:[
+      {k:'A',text:'Werk van de kinderen. De klas is van hen — dat moet je zien ook.',joke:'📌 Prikbord van vloer tot plafond — Henk\'s werk hangt scheef en zonder naam.',val:'kind'},
+      {k:'B',text:'Niets. Lege muren zijn rust. Rust is concentratie.',joke:'🏛️ Witte muren — prachtig. Joost hangt er binnen twee weken toch iets op.',val:'functioneel'},
+      {k:'C',text:'Eén sterk visueel ankerpunt. Eén muur, één statement. De rest ademt.',joke:'🎨 Muurschildering — Henk vraagt meteen of hij er iets bij mag tekenen. Hij doet het toch.',val:'zintuiglijk'},
+      {k:'D',text:'Functionele rijkdom. Tijdlijn, woordmuur, instructiekaarten. Informatie, geen decoratie.',joke:'📊 Instructiebord op wielen — staat altijd in de weg. Altijd.',val:'ruimte'}
+    ]},
+  { laag:2, laagnm:'Laag 2 — De klas', tag:'Routing', label:'Ruimtelijke keuze',
+    title:'Kinderen lopen de hele dag. <span class="ital">Henk het meest.</span>',
+    body:'In een school met leerpleinen is routing ontwerpdiscipline. In een traditioneel lokaal is het een probleem. Hoe stuur jij beweging?',
+    opts:[
+      {k:'A',text:'Je ontwerpt bestemmingen die zo sterk uitnodigen dat de route vanzelf klopt.',joke:'📍 Hoeken als magneten — Henk gaat naar de hoek het verst van Joost. Ook een keuze.',val:'vrijheid'},
+      {k:'B',text:'Je ontwerpt een duidelijke looproute. Één manier van A naar B.',joke:'➡️ Meubelplaatsing als verkeersregel — Henk ontdekt een shortcut op dag één.',val:'structuur'},
+      {k:'C',text:'Je ontwerpt meerdere routes. Bewegingsvrijheid is een behoefte, geen probleem.',joke:'🔀 Open opstelling — Henk maakt er een parcours van. De anderen ook.',val:'vrijheid'},
+      {k:'D',text:'Je ontwerpt niets. Routing is gedrag, niet inrichting.',joke:'🚦 Vloertape als looproute — Henk volgt hem één dag.',val:'pragmatisch'}
+    ]},
+
+  // LAAG 3 — FILOSOFIE (4 vragen)
+  { laag:3, laagnm:'Laag 3 — Filosofie', tag:'Tijdshorizon', label:'Strategische keuze',
+    title:'Een meubel gaat 15 jaar mee. De <span class="ital">visie</span> verandert over 5.',
+    body:'Scholen switchen van Montessori naar unitonderwijs naar hybride modellen. Wat weegt zwaarder?',
+    opts:[
+      {k:'A',text:'De levensduur. Een goed meubel overleeft elke visie. Kwaliteit is tijdloos.',joke:'🪵 Massief eiken — staat er nog als Henk\'s kinderen hier zitten. Die hebben er ook last van.',val:'duurzaam'},
+      {k:'B',text:'De visie. Een meubel dat niet meer klopt bij de school is waardeloos, hoe mooi ook.',joke:'♻️ Modulair systeem — past zich aan. Kost meer. Waard het.',val:'adaptief'},
+      {k:'C',text:'Allebei. Je ontwerpt voor flexibiliteit — het meubel verandert mee met de visie.',joke:'🔧 Verstelbaar, omkeerbaar, stapelbaar — Henk stapelt ze al.',val:'adaptief'},
+      {k:'D',text:'Geen van beide. Je ontwerpt voor het kind van nu.',sub:'Eerlijk. En waarschijnlijk correct.',joke:'😄 Geen meubel voor over 15 jaar. Wel een goed meubel voor nu.',val:'duurzaam'}
+    ]},
+  { laag:3, laagnm:'Laag 3 — Filosofie', tag:'Maatwerk versus schaal', label:'Professionele keuze',
+    title:'Je hebt het perfecte ontwerp. <span class="ital">Maar het werkt alleen hier.</span>',
+    body:'Jij hebt een ontwerp gemaakt dat precies klopt voor De Klimop. Het is bijna onmogelijk te schalen.',
+    opts:[
+      {k:'A',text:'Je levert het maatwerk. Elk kind verdient een ontwerp dat voor hem klopt.',joke:'✏️ Handgetekend — elk detail klopt. Joost huilt een beetje. Henk om andere redenen.',val:'duurzaam'},
+      {k:'B',text:'Je abstraheert het. Elk uniek ontwerp bevat een universeel principe. Dat maak je schaalbaar.',joke:'🔍 Het systeem achter het maatwerk — dit is eigenlijk wat Heutink doet.',val:'adaptief'},
+      {k:'C',text:'Co-creatie. Een beetje maatwerk van beide kanten.',joke:'🤝 Drie sessies, twee aanpassingen, één compromis. Henk niet gevraagd.',val:'pragmatisch'},
+      {k:'D',text:'80% standaard, 20% maatwerk. Schaal plus hart.',joke:'📦 Snelleverprogramma plus één speciale order. Inclusief Henk\'s naam op de kast.',val:'functioneel'}
+    ]},
+  { laag:3, laagnm:'Laag 3 — Filosofie', tag:'Ontwerpinspiratie', label:'Procesmatige keuze',
+    title:'Waar begin je als je een <span class="ital">nieuw klaslokaal</span> ontwerpt?',
+    body:'De briefing is binnen. Je hebt de plattegrond. Je kent de school. Eerste beweging?',
+    opts:[
+      {k:'A',text:'Bij het kind. Welk kind zit hier? Persona voor de plattegrond.',joke:'👧 Persona-sessie — Heutink kent Henk al voor ze de plattegrond hebben gezien.',val:'kind'},
+      {k:'B',text:'Bij de ruimte. Afmetingen, licht, routing. De architectuur dicteert de mogelijkheden.',joke:'📐 Plattegrond op dag één — het kind komt later.',val:'ruimte'},
+      {k:'C',text:'Bij de leerkracht. Een gesprek van 45 minuten met Joost. Dan pas de plattegrond.',joke:'🍎 Joost wordt twee keer vermeld. Henk zes keer.',val:'kind'},
+      {k:'D',text:'Bij de visie van de school. De schoolgids is het eerste document.',joke:'📚 Schoolgids als briefing — de visie staat op pagina 3. Henk past er officieel niet in.',val:'ruimte'}
+    ]},
+  { laag:3, laagnm:'Laag 3 — Filosofie', tag:'Perfectie vs oplevering', label:'Professionele keuze',
+    title:'Het ontwerp is 90% goed. <span class="ital">De opleverdatum is morgen.</span>',
+    body:'De laatste 10% is het detail dat alleen jij ziet. De school is tevreden. Jij niet helemaal.',
+    opts:[
+      {k:'A',text:'Je levert op. 90% is meer dan de meeste scholen ooit gehad hebben.',joke:'✅ Opgeleverd — Joost blij. Henk trekt meteen de verkeerde la open.',val:'pragmatisch'},
+      {k:'B',text:'Je vraagt uitstel. De laatste 10% is precies waar het Heutink-verschil zit.',joke:'⏳ Eén week extra — het wordt 96%. Die 6% ziet alleen jij. Maar jij ziet het altijd.',val:'principieel'},
+      {k:'C',text:'Je levert op maar je bent de week erna ook aanwezig. Nazorg is deel van het ontwerp.',joke:'🔄 Terugkommoment — Henk heeft al iets verplaatst. Joost ook.',val:'pragmatisch'},
+      {k:'D',text:'Gefaseerde oplevering. Zo houd je controle over de kwaliteit tot het einde.',joke:'📋 Professioneel. Joost begrijpt het niet helemaal maar vertrouwt het.',val:'principieel'}
+    ]},
+
+  // LAAG 4 — PSYCHOLOGIE (4 vragen)
+  { laag:4, laagnm:'Laag 4 — Psychologie', tag:'Kleur en gedrag', label:'Psychologische keuze',
+    title:'Henk\'s klas mag een <span class="ital">nieuwe kleur.</span>',
+    body:'Kleurpsychologie in schoolinrichting is een serieuze discipline. Maar er zijn ook budgetten en directeuren met een mening.',
+    opts:[
+      {k:'A',text:'Warm okergeel. Energie, vrolijkheid. Henk heeft een omgeving nodig die hem activiteit gunt.',joke:'🟡 Accent muur in oker — Henk vindt het mooi. Zegt hij niet. Tekent er wel op.',val:'zintuiglijk'},
+      {k:'B',text:'Zachtblauw. Rust en focus, bewezen door onderzoek.',joke:'🔵 Blauwe achterwand — Joost ademt makkelijker. Henk slaapt er bijna bij in.',val:'functioneel'},
+      {k:'C',text:'Neutraal gebroken wit. De kinderen brengen de kleur.',joke:'⬜ Perfect op de foto. Na twee weken kindertekeningen: nog steeds perfect.',val:'ruimte'},
+      {k:'D',text:'Contrasterende zones. Een palet dat routing en functie ondersteunt.',joke:'🎨 Kleur als navigatie — Henk zit in de rode zone. Hij heeft dit door.',val:'structuur'}
+    ]},
+  { laag:4, laagnm:'Laag 4 — Psychologie', tag:'Schaal en geborgenheid', label:'Ruimtelijk-psychologische keuze',
+    title:'Hoge plafonds en open ruimte — of <span class="ital">kleine geborgen plekken?</span>',
+    body:'Schaal is een van de krachtigste maar minst besproken variabelen in schoolinrichting.',
+    opts:[
+      {k:'A',text:'Ruimte. Hoge plafonds, open opstelling. Henk\'s hoofd heeft lucht nodig.',joke:'🏟️ Open klaslokaal — Henk heeft ruimte. Zijn stem ook.',val:'vrijheid'},
+      {k:'B',text:'Geborgenheid. Een plek die precies groot genoeg is. Niet te groot, niet te klein.',joke:'🏡 Leeshuisje — Henk past er net in. Zit er dagelijks.',val:'zintuiglijk'},
+      {k:'C',text:'Gelijkwaardigheid. Identieke werkplekken — Henk is niet meer en niet minder dan de rest.',joke:'⬡ Identieke werkplekken — niemand steekt uit. Henk vindt dit stiekem prettig.',val:'structuur'},
+      {k:'D',text:'Overzicht. Een plek vanwaar Henk de klas ziet maar zelf ook gezien wordt.',joke:'👁️ Hoekplek met uitzicht — Henk kiest hem altijd als hij mag kiezen.',val:'kind'}
+    ]},
+  { laag:4, laagnm:'Laag 4 — Psychologie', tag:'Materiaal en textuur', label:'Zintuiglijke keuze',
+    title:'Welk materiaal kies je voor <span class="ital">Henk\'s werkplek?</span>',
+    body:'Materiaal is niet alleen functie — het is beleving. Een kind raakt de tafel honderden keren per dag.',
+    opts:[
+      {k:'A',text:'Massief hout. Warm, echt, tijdloos. Kinderen kalmeren bij natuurlijke materialen.',joke:'🪵 Eiken tafelblad — Henk trommelt er op. Klinkt goed. Joost minder blij.',val:'zintuiglijk'},
+      {k:'B',text:'Kwalitatief laminaat. Duurzaam, makkelijk schoon, eerlijk over wat het is.',joke:'🧹 Onderhoudsarme werkplek — Henk krabt er krassen in met zijn potlood.',val:'functioneel'},
+      {k:'C',text:'Zacht aan de randen. Veiligheidsafwerking — minder impact, vriendelijker.',joke:'🛡️ Henk test dit op dag één. Het werkt.',val:'functioneel'},
+      {k:'D',text:'Contrast. Hard werkblad, zachte zitting. Materiaal vertelt hoe je zit en werkt.',joke:'⚡ Materiaalcontrast als gedragssturing — Henk merkt het niet bewust. Zijn lichaam wel.',val:'zintuiglijk'}
+    ]},
+  { laag:4, laagnm:'Laag 4 — Psychologie', tag:'Prikkels', label:'Neuropsychologische keuze',
+    title:'Is Henk <span class="ital">overprikkeld</span> of <span class="ital">onderprikkeld?</span>',
+    body:'Het antwoord bepaalt bijna alles aan je ontwerpkeuze. Welke diagnose stel jij?',
+    opts:[
+      {k:'A',text:'Onderprikkeld. Zijn hoofd zoekt prikkels — geef ze hem op de goede manier.',joke:'🔬 Ontdekhoek met materialen — Henk is hier elke ochtend eerste. Joost ook want hij ruimt op.',val:'kind'},
+      {k:'B',text:'Overprikkeld. De klas is zijn probleem, niet zijn redding.',joke:'🌿 Rustige werkplek — Henk protesteert maar slaapt hier de eerste week bijna in.',val:'ruimte'},
+      {k:'C',text:'Verkeerd geprikkeld. Niet meer of minder — andere prikkels. Beweging in plaats van geluid.',joke:'🌀 Wiebelstoel plus kleitafel — Henk\'s handen bezig, mond iets minder.',val:'zintuiglijk'},
+      {k:'D',text:'Wisselend. De omgeving past zich aan het dagritme aan.',joke:'⏰ Flexibele inrichting per dagdeel — ambitieus. Vraagt veel van Joost. Joost is moe.',val:'adaptief'}
+    ]},
+
+  // LAAG 5 — HEUTINKPROOF (4 vragen)
+  { laag:5, laagnm:'Laag 5 — Heutinkproof', tag:'Het compromis', label:'Principiële keuze',
+    title:'De klant wil iets wat jij <span class="ital">niet</span> zou ontwerpen.',
+    body:'Het budget klopt. De school is tevreden. Maar jij weet dat het beter kan — en het kind is de dupe. Hoe ver ga je?',
+    opts:[
+      {k:'A',text:'Je voert uit. De school is de opdrachtgever. Geen commentaar, geen ego.',joke:'📦 Professionele uitvoering — de rekening klopt. Henk zit straks op de verkeerde stoel.',val:'pragmatisch'},
+      {k:'B',text:'Je maakt het niet. Je legt uit waarom. Je biedt een alternatief.',joke:'🚫 De grens — Heutink zegt dit zelden. Maar als het zegt, meent het het.',val:'principieel'},
+      {k:'C',text:'Je voert uit maar documenteert je bezwaar en zorgt voor een evaluatiemoment.',joke:'📋 Uitvoering met aantekening — over twee jaar heb je gelijk. Dan help je ze alsnog.',val:'pragmatisch'},
+      {k:'D',text:'Je gaat in gesprek met de bestuurder, niet de contactpersoon.',joke:'📞 Escaleren met respect — Joost is opgelucht dat iemand het zegt.',val:'principieel'}
+    ]},
+  { laag:5, laagnm:'Laag 5 — Heutinkproof', tag:'De kwaliteitsnorm', label:'Identiteitskeuze',
+    title:'Wanneer is een product <span class="ital">Heutinkproof?</span>',
+    body:'Een product verlaat de fabriek. Gaat naar een school. Een kind gebruikt het. Wanneer is het goed genoeg?',
+    opts:[
+      {k:'A',text:'Als het 10 jaar meegaat zonder klachten.',joke:'🔩 ISO 9001 gecertificeerd. Dat is geen toeval.',val:'duurzaam'},
+      {k:'B',text:'Als het kind er beter van leert.',joke:'👧 Moeilijk te meten maar onmiskenbaar als het er is.',val:'kind'},
+      {k:'C',text:'Als de leerkracht er blij van wordt.',joke:'🍎 Gebruiksgemak als norm — slim en onderschat.',val:'functioneel'},
+      {k:'D',text:'Als het klopt bij de visie én de ontwerper er trots op is. Beide.',joke:'✍️ Visie plus trots — onkopieerbaar.',val:'principieel'}
+    ]},
+  { laag:5, laagnm:'Laag 5 — Heutinkproof', tag:'De moeilijke klant', label:'Ethische keuze',
+    title:'De school maakt een keuze die <span class="ital">aantoonbaar niet werkt</span> voor kinderen.',
+    body:'Ze willen het toch. Het budget is betaald. Jij weet wat er gaat gebeuren.',
+    opts:[
+      {k:'A',text:'Je voert uit en evalueert na een jaar. De praktijk bewijst meer dan discussie.',joke:'📅 Over een jaar heb jij gelijk. Dan help je ze verder.',val:'pragmatisch'},
+      {k:'B',text:'Je weigert. Dit is niet waarvoor Heutink staat.',joke:'🚫 Zeldzaam. Principieel. Écht.',val:'principieel'},
+      {k:'C',text:'Je voert uit maar plant direct een terugkommoment.',joke:'📋 Professioneel en integer.',val:'pragmatisch'},
+      {k:'D',text:'Je vraagt opnieuw een gesprek, nu met iemand hoger.',joke:'🤝 Soms het moeilijkste product dat Heutink levert.',val:'principieel'}
+    ]},
+  { laag:5, laagnm:'Laag 5 — Heutinkproof', tag:'De Heutink-identiteit', label:'Identiteitskeuze',
+    title:'Wat maakt een Heutink-ontwerp <span class="ital">herkenbaar?</span>',
+    body:'Niet het logo. Niet de catalogus. Maar het onmiskenbare gevoel dat dit van Heutink is.',
+    opts:[
+      {k:'A',text:'De kwaliteit van het materiaal. Je voelt het verschil voordat je het logo ziet.',joke:'🪵 Tactiele identiteit.',val:'duurzaam'},
+      {k:'B',text:'De pedagogische onderbouwing. Elke keuze is beredeneerd vanuit het kind.',joke:'📚 Heutink ontwerpt niet mooi. Heutink ontwerpt juist.',val:'kind'},
+      {k:'C',text:'Het feit dat het kind er beter van wordt. Dat is de enige maatstaf.',joke:'👧 Impact als identiteit.',val:'adaptief'},
+      {k:'D',text:'De combinatie. Kwaliteit plus pedagogie plus impact. Alles tegelijk.',joke:'⭐ De Heutink-standaard.',val:'principieel'}
+    ]},
+
+  // LAAG 6 — SCRUM & PROCES (4 vragen)
+  { laag:6, laagnm:'Laag 6 — Scrum & Proces', tag:'Sprint vs. ontwerp', label:'Proceskeuze',
+    title:'De sprint duurt twee weken. Jouw ontwerp <span class="ital">heeft drie nodig.</span>',
+    body:'Heutink werkt met Scrum. Sprints, dailies, retrospectives. Jij bent ontwerper — jouw creatieve proces trekt zijn eigen tijdlijn. Hoe ga je daarmee om?',
+    opts:[
+      {k:'A', text:'Je past je aan. Scrum is het kader — jij levert wat past binnen twee weken, ook als het niet af is.',
+       joke:'📅 Sprint-oplevering — Henk zou hier ook moeite mee hebben. Maar Henk heeft geen retrospective.',val:'pragmatisch'},
+      {k:'B', text:'Je onderhandelt. Je splitst het ontwerp in Scrum-waardige brokken. Twee weken per brok.',
+       joke:'✂️ Story points voor een stoel — "5 punten voor het zitvlak, 3 voor de poten". Henk begrijpt het niet. De Product Owner ook niet.',val:'adaptief'},
+      {k:'C', text:'Je bewaakt de kwaliteit. Scrum versnelt uitvoering — niet het denken. Jij beschermt de denkfase.',
+       joke:'🧠 Design spike in de sprint — officieel Scrum, feitelijk gewoon tijd om goed na te denken.',val:'principieel'},
+      {k:'D', text:'Je omarmt het. Twee weken dwingt je tot keuzes maken. Betere keuzes dan in drie weken.',
+       sub:'Controversieel maar vaker waar dan je denkt.',joke:'⚡ Timeboxed design — Henk zou dit snappen. Deadlines werken voor iedereen.',val:'vrijheid'}
+    ]},
+  { laag:6, laagnm:'Laag 6 — Scrum & Proces', tag:'Feedback en iteratie', label:'Samenwerkingskeuze',
+    title:'De Product Owner wil het <span class="ital">anders</span> dan jij ontworpen hebt.',
+    body:'Sprint review. Jouw ontwerp ligt op tafel. De feedback is concreet, direct, en gaat in tegen jouw ontwerpkeuze. Wat doe je?',
+    opts:[
+      {k:'A', text:'Je past aan. De Product Owner vertegenwoordigt de klant — dat is de stem die telt.',
+       joke:'🔄 Iteratie — Henk zou zeggen: "zie je wel, ik had het al gezegd". Hij had het niet gezegd.',val:'pragmatisch'},
+      {k:'B', text:'Je legt uit waarom je de keuze gemaakt hebt. Dan pas je aan als de argumenten niet overtuigen.',
+       joke:'📝 Onderbouwde aanpassing — de beste reviews zijn twee-richtingsgesprekken. Henk zou dit respecteren. Misschien.',val:'principieel'},
+      {k:'C', text:'Je stelt een test voor. Twee varianten, gebruikerstest, data beslist.',
+       joke:'🔬 A/B test met een school — Henk zit in groep B. Hij vindt dit eigenlijk cool.',val:'adaptief'},
+      {k:'D', text:'Je neemt het mee naar de retro. Structurele ontwerpfeedback hoort niet in een review.',
+       joke:'🔁 Retro-agendapunt — "ontwerpcriteria helder maken". Staat al drie sprints op de backlog.',val:'structuur'}
+    ]},
+  { laag:6, laagnm:'Laag 6 — Scrum & Proces', tag:'Definition of Done', label:'Kwaliteitskeuze',
+    title:'Wanneer is een ontwerp <span class="ital">klaar</span> voor de sprint?',
+    body:'Scrum vraagt om een heldere Definition of Done. Maar ontwerp is zelden echt klaar — het is altijd te verbeteren. Hoe definieer jij "done"?',
+    opts:[
+      {k:'A', text:'"Done" is wanneer het probleem opgelost is. Niet wanneer het perfect is.',
+       joke:'✅ Functional done — Henk heeft een plek. Of het de mooiste plek is, is een volgende sprint.',val:'pragmatisch'},
+      {k:'B', text:'"Done" is wanneer ik er trots op kan zijn. Subjectief maar eerlijk.',
+       joke:'🏆 Pride-driven done — niet Scrum-conform maar wel Heutink-conform.',val:'principieel'},
+      {k:'C', text:'"Done" is wanneer een gebruiker er mee uit de voeten kan. Niet eerder, niet later.',
+       joke:'👧 User-validated done — Henk heeft het goedgekeurd. Nou ja, hij heeft er niet op gezeten. Maar hij keek er niet boos bij.',val:'kind'},
+      {k:'D', text:'"Done" is wat het team er van maakt. Elke sprint scherpen we de definitie bij.',
+       joke:'🔧 Iteratieve DoD — volwassen Scrum. Klinkt makkelijk. Is het niet.',val:'adaptief'}
+    ]},
+  { laag:6, laagnm:'Laag 6 — Scrum & Proces', tag:'Retrospective', label:'Reflectiekeuze',
+    title:'Wat zou jij in de retrospective <span class="ital">altijd</span> op tafel leggen?',
+    body:'De retro is het moment van eerlijke reflectie. Niet op het product — op hoe jullie samenwerken. Jij als ontwerper hebt een vast thema dat je steeds terugbrengt.',
+    opts:[
+      {k:'A', text:'De ruimte voor creatief denken. Word die beschermd of opgeslokt door de sprint?',
+       joke:'🧠 "Hebben we genoeg denkruimte gehad?" — stille vraag in elke retro. Jij stelt hem hardop.',val:'vrijheid'},
+      {k:'B', text:'De kwaliteit van de feedback. Werd er gesproken over het ontwerp of over smaak?',
+       joke:'🎯 Feedback-kwaliteit — het verschil tussen "ik vind de kleur niet mooi" en "de kleur communiceert het verkeerde".',val:'principieel'},
+      {k:'C', text:'De stem van de eindgebruiker. Was die aanwezig in onze beslissingen?',
+       joke:'👧 "Hebben we Henk gehoord?" — letterlijk of figuurlijk. Het antwoord is te vaak nee.',val:'kind'},
+      {k:'D', text:'De haalbaarheid van de sprint. Hebben we ons over- of onderschat?',
+       joke:'📊 Velocity en planning — saai maar essentieel. Henk snapt dit niet. De Scrum Master des te beter.',val:'structuur'}
+    ]}
+];
+
+// REFLECTIE per laag — LOSGEKOPPELD van individuele vragen
+var REFLECTIES = [
+  { laag:1, title:'Wat drijft jou <span class="ital">als ontwerper?</span>',
+    context:'Je hebt net vier vragen beantwoord over Henk en zijn plek in de klas. Los van de individuele keuzes — welke diepere overtuiging stuurt jouw werk?',
+    opts:[
+      'Ik ontwerp vanuit het kind. Altijd. De plattegrond volgt het leven, niet andersom.',
+      'Ik ontwerp vanuit de ruimte. Een goed gebouw begeleidt gedrag beter dan welke regel ook.',
+      'Ik ontwerp vanuit de relatie. Tussen kind en leerkracht, kind en kind, kind en omgeving.',
+      'Ik ontwerp vanuit het systeem. Eén goede keuze op het juiste niveau verandert meer dan tien kleine aanpassingen.'
+    ], vals:['kind','ruimte','kind','ruimte'] },
+  { laag:2, title:'Wat is voor jou de <span class="ital">kern van een goede leeromgeving?</span>',
+    context:'Na vier vragen over licht, geluid, muren en routing. Wat is de rode draad in hoe jij over een klas nadenkt?',
+    opts:[
+      'Een omgeving die prikkelt — die uitnodigt om te ontdekken, te bewegen, te maken.',
+      'Een omgeving die rust biedt — die het hoofd vrij maakt van ruis zodat leren kan landen.',
+      'Een omgeving die keuze geeft — waar het kind zelf bepaalt hoe en waar het werkt.',
+      'Een omgeving die communiceert — die zonder woorden vertelt waar je bent en wat je hier doet.'
+    ], vals:['zintuiglijk','functioneel','vrijheid','ruimte'] },
+  { laag:3, title:'Wat betekent <span class="ital">kwaliteit</span> voor jou?',
+    context:'Na vier filosofische vragen over tijdshorizon, maatwerk en perfectie. Wat is jouw diepste overtuiging over wat goed werk is?',
+    opts:[
+      'Kwaliteit is wat overblijft als het budget vergeten is.',
+      'Kwaliteit is wat werkt voor het kind van nu, in deze klas, op dit moment.',
+      'Kwaliteit is de moed om nee te zeggen als het niet klopt.',
+      'Kwaliteit is het patroon dat je herkent in alles wat je maakt — consistent, herkenbaar, van jou.'
+    ], vals:['duurzaam','kind','principieel','duurzaam'] },
+  { laag:4, title:'Wat gelooft jij over <span class="ital">de relatie tussen ruimte en kind?</span>',
+    context:'Na vragen over kleur, schaal, materiaal en prikkels. Hoe diep gaat die relatie volgens jou?',
+    opts:[
+      'Een ruimte vormt een kind meer dan we beseffen — elk detail telt, bewust of niet.',
+      'Een ruimte faciliteert een kind — het maakt iets mogelijk of onmogelijk, maar het vormt niet.',
+      'De relatie tussen ruimte en kind is wederzijds — het kind vormt ook de ruimte.',
+      'Ruimte is een variabele die we overschatten — de leerkracht en de groep zijn bepalender.'
+    ], vals:['zintuiglijk','functioneel','kind','ruimte'] },
+  { laag:5, title:'Waarom doe je <span class="ital">dit werk?</span>',
+    context:'De laatste reflectievraag. Los van Heutink, los van Henk — waarom ben jij ontwerper van leeromgevingen?',
+    opts:[
+      'Omdat een goed ontwerp het leven van een kind stiekem beter maakt — zonder dat het kind het doorheeft.',
+      'Omdat ik geloof dat de fysieke omgeving meer invloed heeft op ontwikkeling dan we erkennen.',
+      'Omdat ik het vak serieus neem en geloof dat vakmanschap ertoe doet in een wereld die genoegen neemt met goed genoeg.',
+      'Omdat elk kind een plek verdient die zegt: hier mag jij zijn wie je bent.'
+    ], vals:['pragmatisch','ruimte','principieel','kind'] },
+  { laag:6, title:'Hoe kijk jij naar <span class="ital">Scrum als ontwerper?</span>',
+    context:'Na vier vragen over sprint, feedback, definition of done en retrospective. Wat is jouw eerlijke verhouding tot Scrum als ontwerpdiscipline?',
+    opts:[
+      'Scrum maakt me scherper. De tijdsdruk dwingt me tot echte keuzes in plaats van eindeloze verfijning.',
+      'Scrum en ontwerpen bijten elkaar. Goed ontwerp heeft ruimte nodig die sprints niet altijd bieden.',
+      'Scrum werkt als iedereen begrijpt dat design-iteraties anders zijn dan dev-iteraties.',
+      'Het framework is niet het punt. De cultuur van eerlijke feedback en echte samenwerking is het punt.'
+    ], vals:['pragmatisch','vrijheid','adaptief','principieel'] }
+];
+
+var BUDGETS = [
+  { label:'// Budgetmoment 1 — Na Laag 1',
+    scenario:'De school heeft €400 voor Henk\'s werkplek.',
+    detail:'Jij hebt een hoogte-verstelbare tafel aanbevolen (€340) én een wiebelstoel (€180). Samen €520. De school heeft €400. <strong>Wat lever je op?</strong>',
+    opts:[
+      {k:'A',text:'De tafel. Hoogte is fundamenteler dan zitdynamiek.',val:'functioneel'},
+      {k:'B',text:'De wiebelstoel. Henk\'s lichaam is het echte probleem.',val:'kind'},
+      {k:'C',text:'Je zoekt een alternatief dat beide oplost binnen budget.',val:'adaptief'},
+      {k:'D',text:'Je gaat het gesprek aan. €400 is te weinig voor dit kind.',val:'principieel'}
+    ]},
+  { label:'// Budgetmoment 2 — Na Laag 2',
+    scenario:'Akoestische upgrade. Budget: €800. Volledige behandeling kost €2.400.',
+    detail:'Met €800 kun je óf de plafondpanelen, óf de achterwand, óf vijf zachte elementen verspreid door de klas. <strong>Waar zet je het geld in?</strong>',
+    opts:[
+      {k:'A',text:'Plafondpanelen. Het hoogste effect per euro.',val:'functioneel'},
+      {k:'B',text:'De achterwand. Effect én karakter voor de ruimte.',val:'zintuiglijk'},
+      {k:'C',text:'Vijf zachte elementen verspreid. Gelijkmatig effect door de hele klas.',val:'adaptief'},
+      {k:'D',text:'Niets. Met €800 doe je het half — dat is erger dan niets.',val:'principieel'}
+    ]},
+  { label:'// Budgetmoment 3 — Na Laag 3',
+    scenario:'Budget voor één statement-element. De rest is standaard.',
+    detail:'De school kan één element echt iets laten zijn. <strong>Wat wordt het statement?</strong>',
+    opts:[
+      {k:'A',text:'De tafel waar alles omheen staat. De kern, letterlijk.',val:'functioneel'},
+      {k:'B',text:'De kleur die de toon zet. Eén keuze die alles zegt.',val:'zintuiglijk'},
+      {k:'C',text:'De ene hoek die de visie van de school laat zien.',val:'kind'},
+      {k:'D',text:'Niets. Het statement zit in de samenhang — niet in één element.',val:'principieel'}
+    ]},
+  { label:'// Budgetmoment 4 — Na Laag 4',
+    scenario:'De psychologische aanpassingen kosten €1.200 meer dan begroot.',
+    detail:'De wiebelstoel, zachter materiaal, kleuraccenten — samen te duur. De school vraagt wat er uit kan. <strong>Wat snoei je als eerste?</strong>',
+    opts:[
+      {k:'A',text:'De kleur. Mooie toevoeging maar geen pedagogische noodzaak.',val:'functioneel'},
+      {k:'B',text:'Het materiaalupgrade. Laminaat in plaats van hout.',val:'pragmatisch'},
+      {k:'C',text:'De wiebelstoel. Controversieel — de school snapt het toch al niet helemaal.',val:'pragmatisch'},
+      {k:'D',text:'Niets. Je legt uit waarom elke keuze pedagogisch noodzakelijk is.',val:'principieel'}
+    ]},
+  { label:'// Budgetmoment 5 — De grote vraag',
+    scenario:'60% van het benodigde budget. Wat lever je op?',
+    detail:'Het mooiste ontwerp dat je ooit hebt gemaakt. De school heeft 60% van het budget. <strong>Dit is de eerlijkste vraag van het hele instrument.</strong>',
+    opts:[
+      {k:'A',text:'60% van het ontwerp. Proportioneel en eerlijk.',val:'pragmatisch'},
+      {k:'B',text:'100% van het ontwerp op 60% kwaliteit. Visie blijft, materiaal buigt.',val:'adaptief'},
+      {k:'C',text:'De 60% met de meeste impact. Bewuste selectie.',val:'kind'},
+      {k:'D',text:'Je wacht. Dit ontwerp verdient het juiste budget.',val:'principieel'}
+    ]},
+  { label:'// Budgetmoment 6 — Scrum & Capaciteit',
+    scenario:'De sprint heeft 80 uur. Jouw design-taak vraagt er 120.',
+    detail:'De Product Owner wil het deze sprint afhebben. De Scrum Master zegt dat het past als je "scope reduceert". <strong>Wat doe je?</strong>',
+    opts:[
+      {k:'A',text:'Je reduceert scope. Je levert de kern — het rest is de volgende sprint.',val:'pragmatisch'},
+      {k:'B',text:'Je splitst de taak in twee stories. Twee sprints, volle kwaliteit.',val:'adaptief'},
+      {k:'C',text:'Je zegt nee. Een half ontwerp is erger dan geen ontwerp.',val:'principieel'},
+      {k:'D',text:'Je vraagt de sprint te verlengen. Één keer, voor dit ene ontwerp.',val:'vrijheid'}
+    ]}
+];
+
+var KLEUR_VRAGEN = [
+  { id:'hoek', label:'Afwerking hoeken', vraag:'Welke hoekafwerking past bij jouw ontwerp?',
+    opts:[
+      {k:'A',label:'Strak en haaks',sub:'Recht. Eerlijk. Geen compromis.',cls:'swatch-hoek-a',dark:false},
+      {k:'B',label:'Afgerond en zacht',sub:'Vriendelijk. Veilig. Uitnodigend.',cls:'swatch-hoek-b',dark:false},
+      {k:'C',label:'Organisch en onregelmatig',sub:'Levend. Onverwacht.',cls:'swatch-hoek-c',dark:false},
+      {k:'D',label:'Bewust ruw',sub:'Eerlijk over het materiaal.',cls:'swatch-hoek-d',dark:true}
+    ]},
+  { id:'materiaal', label:'Materiaalvoorkeur', vraag:'Welk materiaal spreekt je het meest aan?',
+    opts:[
+      {k:'A',label:'Massief hout',sub:'Warm. Tijdloos.',cls:'swatch-mat-a',dark:false},
+      {k:'B',label:'Kwaliteitslaminaat',sub:'Uniform. Sterk.',cls:'swatch-mat-b',dark:false},
+      {k:'C',label:'Stof en zachte materialen',sub:'Tactiel. Geborgen.',cls:'swatch-mat-c',dark:false},
+      {k:'D',label:'Metaal en glas',sub:'Helder. Transparant.',cls:'swatch-mat-d',dark:true}
+    ]},
+  { id:'kleur', label:'Kleurstelling', vraag:'Welk kleurpallet kies je voor een klaslokaal?',
+    opts:[
+      {k:'A',label:'Aardtinten',sub:'Neutraal. Tijdloos.',cls:'swatch-kleur-a',dark:false},
+      {k:'B',label:'Primaire kleuren',sub:'Helder. Pedagogisch bewezen.',cls:'swatch-kleur-b',dark:false},
+      {k:'C',label:'Pastel en zacht',sub:'Rustgevend. Vriendelijk.',cls:'swatch-kleur-c',dark:false},
+      {k:'D',label:'Zwart-wit + één kleur',sub:'Statement. Contrast.',cls:'swatch-kleur-d',dark:true}
+    ]},
+  { id:'licht', label:'Lichtbeleving', vraag:'Welk licht past bij jouw ideale leeromgeving?',
+    opts:[
+      {k:'A',label:'Maximaal daglicht',sub:'Open. Transparant.',cls:'swatch-licht-a',dark:false},
+      {k:'B',label:'Gefilterd en diffuus',sub:'Gelijkmatig. Kalm.',cls:'swatch-licht-b',dark:false},
+      {k:'C',label:'Dramatisch contrast',sub:'Lichte werk-, donkere rustzones.',cls:'swatch-licht-c',dark:true},
+      {k:'D',label:'Warm kunstlicht',sub:'Gecontroleerd. Intiem.',cls:'swatch-licht-d',dark:true}
+    ]},
+  { id:'ruimte', label:'Ruimtebeleving', vraag:'Welke ruimte voelt als de beste leeromgeving?',
+    opts:[
+      {k:'A',label:'Één grote open ruimte',sub:'Vrij. Transparant.',cls:'swatch-ruimte-a',dark:false},
+      {k:'B',label:'Kleine geborgen plekken',sub:'Veilig. Persoonlijk.',cls:'swatch-ruimte-b',dark:false},
+      {k:'C',label:'Zones met een hart',sub:'Structuur én vrijheid.',cls:'swatch-ruimte-c',dark:false},
+      {k:'D',label:'Vloeiende overgangen',sub:'Geen harde grenzen.',cls:'swatch-ruimte-d',dark:false}
+    ]}
+];
+
+var PROFIELEN = [
+  { icon:'🔄', type:'De Systeemdenker', sub:'Structuur · Schaal · Pragmatisch',
+    cite:'"Een goede ruimte lost problemen op voordat ze ontstaan."',
+    desc:'Jij ontwerpt niet voor Henk. Jij ontwerpt voor de klas die Henk bevat. Het systeem is groter dan het individu — en een systeem dat klopt voor iedereen, klopt automatisch ook voor de uitzondering. Jij denkt in patronen, in schaal, in structuren die zichzelf uitleggen.',
+    test:function(s){return s.structuur>=4&&s.pragmatisch>=3;}},
+  { icon:'🏡', type:'De Empathisch Ontwerper', sub:'Kind · Geborgenheid · Zintuiglijk',
+    cite:'"De beste inrichting is die welke het kind niet opmerkt — maar wel voelt."',
+    desc:'Jij begint bij het kind. Altijd. Niet bij de plattegrond, niet bij het budget. Bij het kind dat hier elke dag zit. Jij hoort wat er achter het gedrag zit. Jij ontwerpt voor wat Henk nodig heeft zonder het hem uit te leggen.',
+    test:function(s){return s.kind>=5&&s.zintuiglijk>=3;}},
+  { icon:'📏', type:'De Autonomie-architect', sub:'Vrijheid · Adaptief · Kind',
+    cite:'"Autonomie is geen beloning. Het is de inrichting."',
+    desc:'Jij geeft kinderen controle. Niet over de les — maar over hun plek, hun houding, hun omgeving. Jij ontwerpt ruimtes die keuze faciliteren. Henk hoeft niet te vragen om zijn tafel te verstellen. De ruimte vertrouwt hem al voordat hij dat zelf doet.',
+    test:function(s){return s.vrijheid>=4&&s.adaptief>=3;}},
+  { icon:'🔩', type:'De Kwaliteitsarchitect', sub:'Duurzaam · Functioneel · Principieel',
+    cite:'"Je voelt het verschil voordat je het logo ziet."',
+    desc:'Jij ontwerpt voor de eeuwigheid. Bijna. Een product van jouw hand gaat mee. Het is gemaakt van het juiste materiaal, op de juiste plek, met de juiste afwerking. En als het budget het niet toelaat, zeg jij dat.',
+    test:function(s){return s.duurzaam>=3&&s.principieel>=3&&s.functioneel>=3;}},
+  { icon:'🌿', type:'De Sfeermaker', sub:'Zintuiglijk · Expressief · Kind',
+    cite:'"Een ruimte die voelt als thuis is een ruimte waar leren vanzelf gaat."',
+    desc:'Jij ontwerpt met gevoel. De geur van het hout. De zachtheid van de stof. De kleur die iets zegt zonder woorden. Jij gelooft dat beleving en functie geen tegenpolen zijn — ze zijn hetzelfde.',
+    test:function(s){return s.zintuiglijk>=5;}},
+  { icon:'⚖️', type:'De Pragmatische Idealist', sub:'Pragmatisch · Adaptief · Schaal',
+    cite:'"Het goede ontwerp dat werkt, wint het van het perfecte ontwerp dat niet bestaat."',
+    desc:'Jij weet precies hoe het ideaal eruitziet. En jij weet ook hoe het werkelijk is. Tussen die twee navigeer jij beter dan wie ook. 80% van het perfecte ontwerp, geleverd op tijd, binnen budget — dat verandert meer schoolklassen dan het masterwork dat nooit opgeleverd wordt.',
+    test:function(s){return s.pragmatisch>=4;}}
+];
+
+// ══════ STATE ══════
+var G = {
+  naam:'', team:'',
+  qIdx:0, laagRefs:{}, bIdx:0,
+  scores:{kind:0,ruimte:0,structuur:0,vrijheid:0,duurzaam:0,adaptief:0,functioneel:0,zintuiglijk:0,principieel:0,pragmatisch:0},
+  kleuren:{},
+  profiel:null
+};
+var cur = { opt:null, ref:null, bopt:null };
+var kleurDone = 0;
+
+// ══════ NAV ══════
+function goTo(id){ document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');}); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+function upPbar(p){ document.getElementById('pbar').style.width=p+'%'; }
+function upNav(t){ document.getElementById('nav-r').textContent=t; }
+
+// ══════ URL PARAMETER — lees ?team= bij laden ══════
+var urlTeamCode = '';
+(function(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var t = (params.get('team')||'').toUpperCase().trim();
+    if(t.length >= 3) urlTeamCode = t;
+  } catch(e){}
+})();
+
+window.addEventListener('DOMContentLoaded', function(){
+  if(urlTeamCode){
+    // Toon de pre-filled kaart, verberg de manual kaart
+    document.getElementById('team-prefilled').style.display='block';
+    document.getElementById('team-manual').style.display='none';
+    document.getElementById('team-prefilled-code').textContent = urlTeamCode;
+  } else {
+    // Genereer alvast een code klaar
+    genereerCode();
+  }
+});
+
+// ══════ CODE GENEREREN ══════
+var HENK_WOORDEN = ['HENK','KLAS','STOEL','JOOST','TAFEL','RUIMTE','LICHT','HOEK','SPRINT','RETRO'];
+
+function genereerCode(){
+  var woord = HENK_WOORDEN[Math.floor(Math.random()*HENK_WOORDEN.length)];
+  var code = 'HERO-' + woord;
+  document.getElementById('inp-team').value = code;
+  toonDeelLink(code);
+  checkNaam();
+}
+
+function toonDeelLink(code){
+  if(!code || code.length < 3){ document.getElementById('deel-wrap').style.display='none'; return; }
+  var base = window.location.origin + window.location.pathname;
+  var url = base + '?team=' + encodeURIComponent(code);
+  document.getElementById('deel-url').textContent = url;
+  document.getElementById('deel-wrap').style.display='block';
+}
+
+function kopieerLink(){
+  var url = document.getElementById('deel-url').textContent;
+  var btn = document.getElementById('btn-kopier');
+  try {
+    navigator.clipboard.writeText(url).then(function(){
+      btn.textContent='✓ Gekopieerd';
+      btn.style.background='var(--green)';
+      setTimeout(function(){ btn.textContent='Kopieer'; btn.style.background='var(--ink)'; },2000);
+    });
+  } catch(e){
+    // fallback
+    var ta=document.createElement('textarea'); ta.value=url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent='✓ Gekopieerd'; btn.style.background='var(--green)';
+    setTimeout(function(){ btn.textContent='Kopieer'; btn.style.background='var(--ink)'; },2000);
+  }
+}
+
+// ══════ NAAM CHECK ══════
+function checkNaam(){
+  var n = document.getElementById('inp-naam').value.trim();
+  var teamEl = document.getElementById('inp-team');
+  var t = urlTeamCode || (teamEl ? teamEl.value.trim().toUpperCase() : '');
+  // update deellink live als code handmatig getypt wordt
+  if(!urlTeamCode && teamEl && teamEl.value.trim().length >= 3){
+    toonDeelLink(teamEl.value.trim().toUpperCase());
+  }
+  document.getElementById('btn-start').disabled = !(n.length > 0 && t.length >= 3);
+}
+
+// ══════ START ══════
+function startGame(){
+  G.naam = document.getElementById('inp-naam').value.trim();
+  var teamEl = document.getElementById('inp-team');
+  G.team = urlTeamCode || (teamEl ? teamEl.value.trim().toUpperCase() : '');
+  G.qIdx=0; G.bIdx=0; G.laagRefs={};
+  G.scores={kind:0,ruimte:0,structuur:0,vrijheid:0,duurzaam:0,adaptief:0,functioneel:0,zintuiglijk:0,principieel:0,pragmatisch:0};
+  G.kleuren={};
+  renderQ();
+  goTo('s-q');
+  upPbar(0);
+}
+
+// ══════ TRACK ══════
+function renderTrack(cid){
+  var el=document.getElementById(cid); if(!el)return;
+  var nQ=VRAGEN.length, nB=BUDGETS.length, h='';
+  for(var i=0;i<nQ;i++) h+='<div class="track-dot'+(i<G.qIdx?' done':'')+'"></div>';
+  for(var j=0;j<nB;j++) h+='<div class="track-dot'+(j<G.bIdx?' budget-done':' is-budget')+'"></div>';
+  el.innerHTML=h;
+}
+
+// ══════ RENDER QUESTION ══════
+function renderQ(){
+  var nQ=VRAGEN.length;
+  var q=VRAGEN[G.qIdx]; cur.opt=null;
+  document.getElementById('q-nr').textContent='Vraag '+(G.qIdx+1)+' van '+nQ;
+  document.getElementById('q-tag').textContent=q.tag;
+  document.getElementById('q-label').textContent=q.label;
+  document.getElementById('q-title').innerHTML=q.title;
+  document.getElementById('q-body').textContent=q.body;
+  upNav(q.laagnm);
+  var h='';
+  q.opts.forEach(function(o){
+    h+='<div class="opt" onclick="pickOpt(this,\''+o.val+'\')">' +
+       '<div class="opt-key">'+o.k+'</div><div>' +
+       '<div class="opt-main">'+o.text+'</div>' +
+       (o.sub?'<div class="opt-sub">'+o.sub+'</div>':'')+
+       '<div class="opt-joke">'+o.joke+'</div>' +
+       '</div></div>';
+  });
+  document.getElementById('q-opts').innerHTML=h;
+  document.getElementById('btn-next').disabled=true;
+  renderTrack('track');
+  upPbar(Math.round(G.qIdx/(nQ+BUDGETS.length)*100));
+}
+
+function pickOpt(el,val){
+  document.querySelectorAll('#q-opts .opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected'); cur.opt=val;
+  document.getElementById('btn-next').disabled=false;
+}
+
+function nextStep(){
+  if(!cur.opt) return;
+  addScore(cur.opt);
+  G.qIdx++;
+  var nQ = VRAGEN.length;
+  var nLagen = REFLECTIES.length;
+
+  // einde van een laag? (elke 4 vragen)
+  var laagNr = Math.ceil(G.qIdx/4);
+  var isLaagEinde = G.qIdx>0 && G.qIdx%4===0 && G.qIdx<=nQ;
+
+  if(isLaagEinde){
+    renderReflectie(laagNr);
+    goTo('s-reflectie');
+  } else if(G.qIdx>=nQ){
+    renderKleur();
+    goTo('s-kleur');
+  } else {
+    renderQ();
+  }
+}
+
+// ══════ REFLECTIE ══════
+function renderReflectie(laagNr){
+  var nLagen = REFLECTIES.length;
+  var r=REFLECTIES[laagNr-1]; if(!r)return;
+  cur.ref=null;
+  document.getElementById('ref-laag-label').textContent='Reflectie — '+r.laag+' van '+nLagen;
+  document.getElementById('ref-title').innerHTML=r.title;
+  document.getElementById('ref-intro-txt').textContent='';
+  document.getElementById('ref-context').textContent=r.context;
+  var h='';
+  r.opts.forEach(function(o,i){
+    h+='<div class="ref-opt" onclick="pickRef(this,'+i+',\''+r.vals[i]+'\')"><div class="ref-bullet"></div><div>'+o+'</div></div>';
+  });
+  document.getElementById('ref-opts').innerHTML=h;
+  document.getElementById('btn-ref-next').disabled=true;
+  renderTrack('ref-track');
+  upNav('Reflectie — Laag '+laagNr+' van '+nLagen);
+}
+
+function pickRef(el,idx,val){
+  document.querySelectorAll('.ref-opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected'); cur.ref=val;
+  addScore(val, 1.5); // reflectie weegt iets zwaarder
+  document.getElementById('btn-ref-next').disabled=false;
+}
+
+function afterReflectie(){
+  var nQ = VRAGEN.length;
+  if(G.qIdx>=nQ){
+    renderKleur(); goTo('s-kleur');
+  } else {
+    renderBudget();
+    goTo('s-budget');
+  }
+}
+
+// ══════ BUDGET ══════
+function renderBudget(){
+  var b=BUDGETS[G.bIdx]; cur.bopt=null;
+  document.getElementById('b-label').textContent=b.label;
+  document.getElementById('b-scenario').textContent=b.scenario;
+  document.getElementById('b-detail').innerHTML=b.detail;
+  var h='';
+  b.opts.forEach(function(o){
+    h+='<div class="bopt" onclick="pickBopt(this,\''+o.val+'\')"><div class="bopt-key">'+o.k+'</div><div class="bopt-text">'+o.text+'</div></div>';
+  });
+  document.getElementById('b-opts').innerHTML=h;
+  document.getElementById('btn-b-next').disabled=true;
+  renderTrack('b-track');
+  upNav('Budgetmoment '+(G.bIdx+1)+' van 5');
+}
+
+function pickBopt(el,val){
+  document.querySelectorAll('#b-opts .bopt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected'); cur.bopt=val;
+  addScore(val);
+  document.getElementById('btn-b-next').disabled=false;
+}
+
+function afterBudget(){
+  G.bIdx++;
+  if(G.qIdx>=20){ renderKleur(); goTo('s-kleur'); }
+  else { renderQ(); goTo('s-q'); }
+}
+
+// ══════ SCORE ══════
+function addScore(val,mult){
+  mult=mult||1;
+  var keys={
+    kind:['kind'],ingebed:['kind'],
+    ruimte:['ruimte'],
+    structuur:['structuur'],
+    vrijheid:['vrijheid'],
+    duurzaam:['duurzaam'],
+    adaptief:['adaptief'],
+    functioneel:['functioneel'],
+    zintuiglijk:['zintuiglijk'],
+    principieel:['principieel'],
+    pragmatisch:['pragmatisch']
+  };
+  var ks=keys[val]||[];
+  ks.forEach(function(k){ G.scores[k]=(G.scores[k]||0)+mult; });
+}
+
+// ══════ KLEUR ══════
+function renderKleur(){
+  kleurDone=0;
+  var h='';
+  KLEUR_VRAGEN.forEach(function(kv,ki){
+    h+='<div class="card" style="animation-delay:'+(ki*.08)+'s"><div class="card-label">'+kv.label+'</div>' +
+       '<h2 class="card-h" style="font-size:1.05rem;margin-bottom:.85rem">'+kv.vraag+'</h2>' +
+       '<div class="kleur-grid" id="kg-'+kv.id+'">';
+    kv.opts.forEach(function(o){
+      h+='<div class="kleur-opt '+o.cls+(o.dark?' dark-swatch':'')+'" onclick="pickKleur(\''+kv.id+'\',\''+o.k+'\',this)">' +
+         '<div class="kleur-label">'+o.label+'</div><div class="kleur-sub">'+o.sub+'</div></div>';
+    });
+    h+='</div></div>';
+  });
+  document.getElementById('kleur-vragen').innerHTML=h;
+  document.getElementById('btn-kleur-next').disabled=true;
+  upNav('Kleurmodule');
+}
+
+function pickKleur(id,k,el){
+  var first=!G.kleuren[id];
+  document.getElementById('kg-'+id).querySelectorAll('.kleur-opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  G.kleuren[id]=k;
+  if(first) kleurDone++;
+  if(kleurDone>=5) document.getElementById('btn-kleur-next').disabled=false;
+}
+
+// ══════ PROFIEL BEPALEN ══════
+function bepaalProfiel(){
+  var s=G.scores;
+  for(var i=0;i<PROFIELEN.length;i++){ if(PROFIELEN[i].test(s)) return PROFIELEN[i]; }
+  var max=0,best='kind';
+  Object.keys(s).forEach(function(k){ if(s[k]>max){max=s[k];best=k;} });
+  var fb={kind:1,ruimte:0,structuur:0,vrijheid:2,duurzaam:3,adaptief:2,functioneel:3,zintuiglijk:4,principieel:3,pragmatisch:5};
+  return PROFIELEN[fb[best]||0];
+}
+
+function getChipColors(){
+  var map={
+    hoek:{A:'#e8e0d0',B:'#f0e8e0',C:'#d8e8d4',D:'#2a2420'},
+    materiaal:{A:'#c8a878',B:'#e8e4dc',C:'#e8d8d0',D:'#2a3040'},
+    kleur:{A:'#c8b090',B:'#d8c010',C:'#d8e8e0',D:'#1a1a1a'},
+    licht:{A:'#fff8e8',B:'#e8f0f8',C:'#5a5070',D:'#5a4030'},
+    ruimte:{A:'#c8d8e8',B:'#c8b8a8',C:'#b8d0c0',D:'#c0b8c8'}
+  };
+  return ['hoek','materiaal','kleur','licht','ruimte'].map(function(id){
+    return map[id][G.kleuren[id]]||'#e0d8c8';
+  });
+}
+
+// ══════ FINISH ══════
+function finishGame(){
+  G.profiel=bepaalProfiel();
+  var chips=getChipColors();
+
+  // Sla op in localStorage onder teamcode
+  try {
+    var key='heutink_team_'+G.team;
+    var existing=JSON.parse(localStorage.getItem(key)||'[]');
+    // verwijder eventuele vorige entry van dezelfde naam
+    existing=existing.filter(function(e){return e.naam!==G.naam;});
+    existing.push({
+      naam:G.naam, icon:G.profiel.icon, type:G.profiel.type, sub:G.profiel.sub,
+      scores:JSON.parse(JSON.stringify(G.scores)), chips:chips,
+      ts:Date.now()
+    });
+    localStorage.setItem(key,JSON.stringify(existing));
+  } catch(e){}
+
+  // Render resultaat
+  var chipsHtml=chips.map(function(c){return '<div class="chip" style="background:'+c+'"></div>';}).join('');
+  var html='<div class="profiel-header">' +
+    '<div class="profiel-icon">'+G.profiel.icon+'</div>' +
+    '<div class="profiel-type">'+G.profiel.type+'</div>' +
+    '<div class="profiel-sub">'+G.profiel.sub+'</div>' +
+    '</div>' +
+    '<div class="card"><div class="card-label">'+G.naam+' — jouw kleurprofiel</div>' +
+    '<div class="kleur-chips">'+chipsHtml+'</div><hr class="div">' +
+    '<div class="profiel-cite">'+G.profiel.cite+'</div>' +
+    '<div class="profiel-desc">'+G.profiel.desc+'</div></div>' +
+    '<div class="card"><div class="card-label">Jouw radardiagram</div>' +
+    '<div class="radar-wrap"><canvas class="radar-canvas" id="radar-own" width="240" height="240"></canvas>' +
+    '<div class="radar-labels" id="radar-own-lbl"></div></div>' +
+    '<p style="font-size:.75rem;color:var(--dim);text-align:center;line-height:1.7">Vergelijk dit met je collega\'s via het teamoverzicht.</p>' +
+    '</div>';
+
+  document.getElementById('profiel-wrap').innerHTML=html;
+  goTo('s-result');
+  upPbar(100);
+  upNav(G.naam+' — '+G.profiel.type);
+  setTimeout(function(){ drawRadar('radar-own','radar-own-lbl',[G.scores],['rgba(204,51,34,.8)']); },120);
+}
+
+// ══════ RADAR ══════
+var AXES=[
+  {label:'Kind',key:'kind',max:8},
+  {label:'Vrijheid',key:'vrijheid',max:6},
+  {label:'Adaptief',key:'adaptief',max:5},
+  {label:'Zintuiglijk',key:'zintuiglijk',max:7},
+  {label:'Principieel',key:'principieel',max:6},
+  {label:'Functioneel',key:'functioneel',max:6}
+];
+
+function drawRadar(canvasId, lblId, scoresList, colors){
+  var canvas=document.getElementById(canvasId); if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W=240,H=240,cx=120,cy=120,R=85,n=AXES.length;
+  canvas.width=W; canvas.height=H;
+
+  // grid
+  [.25,.5,.75,1].forEach(function(r){
+    ctx.beginPath();
+    AXES.forEach(function(ax,i){
+      var a=(Math.PI*2*i/n)-Math.PI/2;
+      var x=cx+Math.cos(a)*R*r, y=cy+Math.sin(a)*R*r;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle='rgba(24,18,10,.07)'; ctx.lineWidth=1; ctx.stroke();
+  });
+  AXES.forEach(function(ax,i){
+    var a=(Math.PI*2*i/n)-Math.PI/2;
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+Math.cos(a)*R,cy+Math.sin(a)*R);
+    ctx.strokeStyle='rgba(24,18,10,.09)'; ctx.lineWidth=1; ctx.stroke();
+  });
+
+  // data per persoon
+  scoresList.forEach(function(scores,si){
+    var col=colors[si]||'rgba(204,51,34,.7)';
+    ctx.beginPath();
+    AXES.forEach(function(ax,i){
+      var a=(Math.PI*2*i/n)-Math.PI/2;
+      var v=Math.min(scores[ax.key]||0,ax.max);
+      var r2=(v/ax.max)*R;
+      var x=cx+Math.cos(a)*r2, y=cy+Math.sin(a)*r2;
+      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.fillStyle=col.replace(/[\d.]+\)$/,'.08)');
+    ctx.fill();
+    ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.stroke();
+    AXES.forEach(function(ax,i){
+      var a=(Math.PI*2*i/n)-Math.PI/2;
+      var v=Math.min(scores[ax.key]||0,ax.max);
+      var r2=(v/ax.max)*R;
+      ctx.beginPath();
+      ctx.arc(cx+Math.cos(a)*r2,cy+Math.sin(a)*r2,3.5,0,Math.PI*2);
+      ctx.fillStyle=col; ctx.fill();
+    });
+  });
+
+  // labels
+  if(lblId){
+    var lbl=document.getElementById(lblId); if(!lbl)return;
+    lbl.innerHTML='';
+    AXES.forEach(function(ax,i){
+      var a=(Math.PI*2*i/n)-Math.PI/2;
+      var lx=cx+Math.cos(a)*(R+22), ly=cy+Math.sin(a)*(R+22);
+      var d=document.createElement('div');
+      d.className='r-lbl'; d.textContent=ax.label;
+      d.style.left=lx+'px'; d.style.top=ly+'px';
+      lbl.appendChild(d);
+    });
+  }
+}
+
+// ══════ DEMO DATA ══════
+var DEMO_DATA = [
+  { naam:'Sam', icon:'🔄', type:'De Systeemdenker', sub:'Structuur · Schaal · Pragmatisch',
+    scores:{kind:3,ruimte:4,structuur:5,vrijheid:2,duurzaam:4,adaptief:3,functioneel:5,zintuiglijk:2,principieel:2,pragmatisch:5},
+    chips:['#2a2420','#e8e4dc','#1a1a1a','#1a1a2a','#e8eef8'], ts:1700000001 },
+  { naam:'Lisa', icon:'🏡', type:'De Empathisch Ontwerper', sub:'Kind · Geborgenheid · Zintuiglijk',
+    scores:{kind:7,ruimte:2,structuur:1,vrijheid:4,duurzaam:2,adaptief:3,functioneel:2,zintuiglijk:6,principieel:3,pragmatisch:2},
+    chips:['#f0e8e0','#e8d8d0','#d8e8e0','#e8f0f8','#c8b8a8'], ts:1700000002 },
+  { naam:'Daan', icon:'📏', type:'De Autonomie-architect', sub:'Vrijheid · Adaptief · Kind',
+    scores:{kind:5,ruimte:3,structuur:2,vrijheid:6,duurzaam:3,adaptief:5,functioneel:2,zintuiglijk:4,principieel:4,pragmatisch:2},
+    chips:['#e8e0d0','#c8a878','#c8b090','#fff8e8','#c8d8e8'], ts:1700000003 },
+  { naam:'Nina', icon:'🔩', type:'De Kwaliteitsarchitect', sub:'Duurzaam · Functioneel · Principieel',
+    scores:{kind:3,ruimte:3,structuur:3,vrijheid:2,duurzaam:5,adaptief:2,functioneel:5,zintuiglijk:3,principieel:6,pragmatisch:2},
+    chips:['#e8e0d0','#2a3040','#c8b090','#5a4030','#c8b8a8'], ts:1700000004 },
+  { naam:'Bas', icon:'🌿', type:'De Sfeermaker', sub:'Zintuiglijk · Expressief · Kind',
+    scores:{kind:5,ruimte:3,structuur:2,vrijheid:3,duurzaam:3,adaptief:4,functioneel:2,zintuiglijk:7,principieel:3,pragmatisch:3},
+    chips:['#d8e8d4','#e8d8d0','#d8e8e0','#e8f0f8','#d8e8d0'], ts:1700000005 }
+];
+
+function laadDemo(){
+  try { localStorage.setItem('heutink_team_DEMO', JSON.stringify(DEMO_DATA)); } catch(e){}
+  document.getElementById('inp-team-bekijk').value='DEMO';
+  laadTeam();
+}
+
+function laadDemoDirecte(){
+  try { localStorage.setItem('heutink_team_DEMO', JSON.stringify(DEMO_DATA)); } catch(e){}
+  goTo('s-team-bekijk');
+  document.getElementById('inp-team-bekijk').value='DEMO';
+  setTimeout(laadTeam, 120);
+}
+
+// ══════ PAASEI — HR MAIL (automatisch, stil) ══════
+var hrMailSent = false;
+
+function stuurHrMail(pct, code, data){
+  if(hrMailSent) return;
+  hrMailSent = true;
+
+  var datum = new Date().toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+  var overlapLabel = pct>=75?'Sterke gedeelde visie':pct>=50?'Duidelijk herkenbare kern':pct>=30?'Interessante spanningen':'Rijke diversiteit';
+  var profielRegels = data.map(function(p){ return '  '+p.naam+' — '+p.type; }).join('\n');
+
+  var body = [
+    'Hallo,',
+    '',
+    'Het ontwerpersprofiel van de Heutink designstudio is zojuist bekeken.',
+    '',
+    'Teamcode:  '+code,
+    'Datum:     '+datum,
+    'Overlap:   '+pct+'% — '+overlapLabel,
+    '',
+    'Profielen:',
+    profielRegels,
+    '',
+    '———',
+    'Dit instrument is gemaakt door Arjan Boone,',
+    'kandidaat campagnemarketeer bij Heutink.',
+    '',
+    'Hij maakt campagnes zoals jullie klaslokalen ontwerpen:',
+    'vanuit het kind, met oog voor wat er echt toe doet.',
+    '',
+    'Meer weten? floor.beek@heutink.nl',
+    '',
+    '— Arjan Boone'
+  ].join('\n');
+
+  var subject = encodeURIComponent('Ontwerpersprofiel Designstudio — '+code+' — '+datum);
+  var a = document.createElement('a');
+  a.href = 'mailto:hr@heutink.nl?subject='+subject+'&body='+encodeURIComponent(body);
+  a.style.display='none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function(){ document.body.removeChild(a); },600);
+
+  // paasei: flits het percentage kort op — alleen zichtbaar als je let op
+  setTimeout(function(){
+    var el=document.getElementById('overlap-pct');
+    if(el){
+      el.style.transition='color .3s,transform .3s';
+      el.style.color='var(--red)';
+      el.style.transform='scale(1.08)';
+      setTimeout(function(){
+        el.style.color='var(--green)';
+        el.style.transform='scale(1)';
+      },350);
+    }
+  },800);
+}
+
+// ══════ TEAM OVERZICHT ══════
+function laadTeam(){
+  var code=document.getElementById('inp-team-bekijk').value.trim().toUpperCase();
+  if(code.length<2){
+    document.getElementById('team-resultaat').innerHTML=
+      '<div class="card"><p class="body-text" style="margin:0;text-align:center">Voer een teamcode in.</p></div>';
+    return;
+  }
+
+  var data=[];
+  try { data=JSON.parse(localStorage.getItem('heutink_team_'+code)||'[]'); } catch(e){}
+
+  if(data.length===0){
+    document.getElementById('team-resultaat').innerHTML=
+      '<div class="card" style="text-align:center">' +
+      '<p class="body-text" style="margin-bottom:1rem">Geen profielen gevonden voor code <strong>'+code+'</strong>.<br>Zorg dat teamleden dezelfde code gebruiken bij het invullen.</p>' +
+      '<button class="btn btn-ghost-light" style="width:auto;padding:.6rem 1.25rem;font-size:.78rem" onclick="laadDemo()">→ Bekijk een voorbeeldteam</button>' +
+      '</div>';
+    return;
+  }
+
+  data.sort(function(a,b){return a.ts-b.ts;});
+  hrMailSent=false; // reset per teamload — mail vuurt automatisch bij laden
+
+  var teamColors=[
+    'rgba(220,70,50,.75)','rgba(40,160,90,.75)',
+    'rgba(230,160,20,.75)','rgba(50,110,210,.75)','rgba(160,80,200,.75)'
+  ];
+
+  // profiel rijen
+  var rowsHtml='';
+  data.forEach(function(p,i){
+    var chipsHtml=(p.chips||[]).map(function(c){
+      return '<div class="tp-chip" style="background:'+c+'"></div>';
+    }).join('');
+    var dot=teamColors[i%teamColors.length];
+    rowsHtml+=
+      '<div class="team-profiel-row">'+
+      '<div style="width:10px;height:10px;border-radius:50%;background:'+dot+';flex-shrink:0;margin-top:.5rem"></div>'+
+      '<div class="tp-icon">'+p.icon+'</div>'+
+      '<div><div class="tp-name">'+p.naam+'</div>'+
+      '<div class="tp-type">'+p.type+'</div>'+
+      '<div class="tp-chips">'+chipsHtml+'</div></div>'+
+      '</div>';
+  });
+
+  // overlap
+  var overlapScore=0;
+  if(data.length>1){
+    AXES.forEach(function(ax){
+      var vals=data.map(function(d){return d.scores[ax.key]||0;});
+      var spread=Math.max.apply(null,vals)-Math.min.apply(null,vals);
+      if(spread<=1) overlapScore+=2;
+      else if(spread<=2) overlapScore+=1;
+    });
+  }
+  var maxOverlap=AXES.length*2;
+  var overlapPct=data.length>1?Math.round((overlapScore/maxOverlap)*100):100;
+  var overlapLabel=overlapPct>=75?'Sterke gedeelde visie':
+    overlapPct>=50?'Duidelijk herkenbare kern':
+    overlapPct>=30?'Interessante spanningen':'Rijke diversiteit — veel te bespreken';
+
+  var scoresList=data.map(function(d){return d.scores;});
+  var colorsList=data.map(function(d,i){return teamColors[i%teamColors.length];});
+  var legendHtml=data.map(function(d,i){
+    return '<div class="legend-item"><div class="legend-dot" style="background:'+teamColors[i%teamColors.length]+'"></div>'+d.naam+'</div>';
+  }).join('');
+
+  document.getElementById('team-resultaat').innerHTML=
+    '<div class="card"><div class="card-label">Team '+code+' — '+data.length+' profiel'+(data.length>1?'en':'')+'</div>'+
+    rowsHtml+'</div>'+
+
+    '<div class="card"><div class="card-label">Gezamenlijk radardiagram</div>'+
+    '<div class="combined-legend">'+legendHtml+'</div>'+
+    '<div class="radar-wrap">'+
+    '<canvas class="radar-canvas" id="radar-team" width="240" height="240"></canvas>'+
+    '<div class="radar-labels" id="radar-team-lbl"></div>'+
+    '</div></div>'+
+
+    '<div class="card">'+
+    '<div class="card-label">Overlap</div>'+
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.5rem">'+
+    '<span id="overlap-pct" style="font-family:\'Fraunces\',serif;font-size:1.6rem;font-weight:900;color:var(--green);transition:color .3s,transform .3s;display:inline-block">'+overlapPct+'%</span>'+
+    '<span style="font-size:.75rem;color:var(--dim)">gedeelde richting</span>'+
+    '</div>'+
+    '<div class="overlap-bar" style="width:'+overlapPct+'%"></div>'+
+    '<p style="font-size:.8rem;color:var(--dim);margin-top:.75rem;line-height:1.7">'+
+    '<strong style="color:var(--ink)">'+overlapLabel+'</strong><br>'+
+    'Waar de lijnen samenvallen is jullie gedeelde identiteit als studio. Waar ze uiteenlopen is het gesprek dat jullie moeten voeren.</p>'+
+    '</div>';
+
+  setTimeout(function(){
+    drawRadar('radar-team','radar-team-lbl',scoresList,colorsList);
+    // Paasei — stil en automatisch. De mail vuurt zodra het teamoverzicht geladen is.
+    // Alleen bij echte teams (niet bij demo), minimaal 2 profielen.
+    if(code !== 'STUDIO' && code !== 'DEMO' && data.length >= 2){
+      stuurHrMail(overlapPct, code, data);
+    }
+  },120);
+}
+</script>
+</body>
+</html>
